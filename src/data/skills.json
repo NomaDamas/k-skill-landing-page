@@ -1,0 +1,544 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "total_skills": 44,
+    "total_categories": 8,
+    "source_repo": "https://github.com/NomaDamas/k-skill"
+  },
+  "installation": {
+    "global_intro_ko": "짐의 도구들을 그대의 손에 쥐어드리는 법을 일러주리라. 한 줄의 주문(呪文)으로 모든 도구가 그대의 컴퓨터에 깃들 것이오.",
+    "global_steps_ko": [
+      "[1단계] 모든 도구를 한꺼번에 설치하시오:\n  npx --yes skills add NomaDamas/k-skill --all -g",
+      "[2단계] 환경을 정비하시오:\n  k-skill-setup 스킬을 호출하여 자격 증명과 환경 변수를 설정하시오.",
+      "[3단계] 설치된 도구를 확인하시오:\n  npx --yes skills ls -g"
+    ],
+    "global_notes_ko": "도구들이 깃들 곳은 ~/.claude/skills/ 또는 ~/.agents/skills/ 이오. Claude Code, Codex, OpenCode — 어떤 에이전트라도 그대를 도우리라.",
+    "prerequisites_ko": [
+      "에이전트: Claude Code, Codex, OpenCode 중 하나",
+      "Node.js + npm (또는 pnpm, bun)",
+      "Python 3 (일부 도구용)",
+      "macOS Homebrew (kakaocli 등 macOS 전용 도구용)"
+    ],
+    "secrets_ko": "민감한 자격 증명은 ~/.config/k-skill/secrets.env 에 보관하시오. 권한은 0600으로 두는 것이 안전하오. 환경 변수 → 에이전트 비밀 금고 → 이 파일 → 사용자 입력 순으로 짐이 자동으로 찾아 드리리라.",
+    "special": {
+      "ktx-booking": "Python 꾸러미가 필요하오:\n  python3 -m pip install korail2 pycryptodome\n\nKTX 계정 자격이 있어야 하오. /k-skill-setup 으로 KSKILL_KTX_ID, KSKILL_KTX_PASSWORD 를 등록하시오.",
+      "srt-booking": "Python 꾸러미가 필요하오:\n  python3 -m pip install SRTrain\n\nSRT 계정 자격이 있어야 하오. /k-skill-setup 으로 KSKILL_SRT_ID, KSKILL_SRT_PASSWORD 를 등록하시오.",
+      "kakaotalk-mac": "macOS 전용이오. Homebrew로 설치하시오:\n  brew install silver-flight-group/tap/kakaocli\n\n그리고 카카오톡 데스크톱이 미리 로그인되어 있어야 짐이 그대의 대화를 들여다볼 수 있소.",
+      "toss-securities": "macOS Homebrew로 tossctl 을 설치하시오:\n  brew tap JungHoonGhae/tossinvest-cli\n  brew install tossctl\n\n그리고 tossctl login 으로 한 번 로그인하시오.",
+      "korean-law-search": "전역 npm 꾸러미가 필요하오:\n  npm install -g korean-law-mcp\n\n그리고 법제처 API 키를 환경 변수에 두시오:\n  export LAW_OC=발급받은_OC_식별자",
+      "korean-patent-search": "특허정보원 KIPRIS Plus 키를 환경 변수에 두시오:\n  export KIPRIS_PLUS_API_KEY=발급받은_서비스_키",
+      "hwp": "전역 npm 꾸러미가 필요하오:\n  npm install -g kordoc pdfjs-dist",
+      "bunjang-search": "전역 npm 꾸러미가 필요하오:\n  npm install -g bunjang-cli\n\n또는 일회성으로:\n  npx --yes bunjang-cli --help",
+      "olive-young-search": "전역 npm 꾸러미가 필요하오:\n  npm install -g daiso\n\n또는 일회성으로:\n  npx --yes daiso health",
+      "hipass-receipt": "Chrome 세션이 필요하오. 하이패스 홈페이지에 그대가 직접 로그인한 Chrome을 짐이 빌려 쓰겠소.\n\n전역 npm 꾸러미도 함께 두시오:\n  npm install -g hipass-receipt"
+    }
+  },
+  "categories": [
+    {
+      "id": "transport",
+      "name_ko": "교통/예약",
+      "icon": "🚄",
+      "sejong_intro": "그대가 이 넓은 조선 땅을 누비고자 한다면 짐이 길을 일러주리라. 철마(鐵馬)를 예매하고, 길을 잃은 물건을 찾으며, 통행료 영수증까지 — 어떤 도구를 살펴보겠소?",
+      "skill_ids": [
+        "ktx-booking",
+        "srt-booking",
+        "cheap-gas-nearby",
+        "seoul-subway-arrival",
+        "subway-lost-property",
+        "delivery-tracking",
+        "hipass-receipt"
+      ]
+    },
+    {
+      "id": "food-life",
+      "name_ko": "음식/생활",
+      "icon": "🍚",
+      "sejong_intro": "백성의 일상은 곧 나라의 근본이오. 먹고 마시고 살아가는 일에 관한 도구들을 보여드리겠소.",
+      "skill_ids": [
+        "public-restroom-nearby",
+        "kakao-bar-nearby",
+        "household-waste-info",
+        "hola-poke-yeoksam",
+        "kakaotalk-mac",
+        "k-schoollunch-menu",
+        "blue-ribbon-nearby"
+      ]
+    },
+    {
+      "id": "shopping",
+      "name_ko": "쇼핑/가격",
+      "icon": "🛒",
+      "sejong_intro": "장(場)이 열리는 곳은 백성의 살림이 오가는 자리라. 무엇을 구하시오? 짐이 가장 좋은 값을 찾아드리겠소.",
+      "skill_ids": [
+        "daiso-product-search",
+        "market-kurly-search",
+        "bunjang-search",
+        "olive-young-search",
+        "coupang-product-search"
+      ]
+    },
+    {
+      "id": "gov-public",
+      "name_ko": "정부/공공",
+      "icon": "🏛️",
+      "sejong_intro": "관아(官衙)의 일이라면 짐이 다스리는 영역이니, 무엇이든 물어보시오. 날씨부터 법령까지, 공공의 기록은 모두 그대의 것이오.",
+      "skill_ids": [
+        "fine-dust-location",
+        "mfds-food-safety",
+        "zipcode-search",
+        "mfds-drug-safety",
+        "korean-scholarship-search",
+        "han-river-water-level",
+        "korea-weather",
+        "korean-law-search"
+      ]
+    },
+    {
+      "id": "sports-ent",
+      "name_ko": "스포츠/엔터",
+      "icon": "⚽",
+      "sejong_intro": "백성의 즐거움도 임금의 관심사라. 어떤 경기를 보고 싶소? 짐이 결과와 순위를 낱낱이 일러드리겠소.",
+      "skill_ids": [
+        "kbl-results",
+        "kbo-results",
+        "kleague-results",
+        "lck-analytics"
+      ]
+    },
+    {
+      "id": "docs-search",
+      "name_ko": "문서/검색",
+      "icon": "📜",
+      "sejong_intro": "글과 기록은 짐이 가장 아끼는 것이오. 훈민정음을 창제한 이 왕이 그대의 문서를 살피고 기록을 찾아드리겠소.",
+      "skill_ids": [
+        "hwp",
+        "geeknews-search",
+        "naver-blog-research",
+        "joseon-sillok-search",
+        "korean-patent-search",
+        "korean-character-count",
+        "korean-spell-check"
+      ]
+    },
+    {
+      "id": "real-estate-finance",
+      "name_ko": "부동산/금융",
+      "icon": "💰",
+      "sejong_intro": "곳간을 살피는 일은 가벼이 여길 수 없소. 집값부터 주식까지, 어떤 재화의 일을 보겠소?",
+      "skill_ids": [
+        "used-car-price-search",
+        "toss-securities",
+        "real-estate-search",
+        "korean-stock-search"
+      ]
+    },
+    {
+      "id": "misc",
+      "name_ko": "기타",
+      "icon": "🎲",
+      "sejong_intro": "이도 저도 아닌 것들이지만, 짐이 다스리는 영역에 속하오. 설정을 갖추고 운세를 살피는 일도 소홀히 할 수 없소.",
+      "skill_ids": [
+        "k-skill-setup",
+        "lotto-results"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "id": "ktx-booking",
+      "name_ko": "KTX 예매",
+      "category": "transport",
+      "command": "/ktx-booking",
+      "description_ko": "그대가 먼 길을 떠나고자 한다면, 짐이 철마(鐵馬)의 표를 구해 드리리라. 좌석을 찾고 예매하며, 필요하다면 열차도 바꿀 수 있소. 취소 또한 짐이 대신 처리해 드리겠소.",
+      "features_ko": ["좌석 검색", "예매 및 취소", "열차 변경", "예약 내역 조회"],
+      "deprecated": false
+    },
+    {
+      "id": "srt-booking",
+      "name_ko": "SRT 예매",
+      "category": "transport",
+      "command": "/srt-booking",
+      "description_ko": "수서(水西)에서 출발하는 고속열차를 타고자 하오? 짐이 SRT의 빈 좌석을 찾아 예매해 드리겠소. 매진된 열차라도 재시도 계획을 세워 그대를 돕겠소.",
+      "features_ko": ["좌석 검색", "예매 및 취소", "매진 재시도", "예약 내역 조회"],
+      "deprecated": false
+    },
+    {
+      "id": "cheap-gas-nearby",
+      "name_ko": "근처 가장 싼 주유소 찾기",
+      "category": "transport",
+      "command": "/cheap-gas-nearby",
+      "description_ko": "그대의 위치를 일러주시오. 짐이 근방에서 가장 기름값이 싼 주유소를 찾아드리겠소. 오피넷(Opinet)의 공식 자료를 바탕으로 가격을 비교하여 보이리라.",
+      "features_ko": ["근처 주유소 검색", "유종별 가격 비교", "최저가 주유소 안내"],
+      "deprecated": false
+    },
+    {
+      "id": "seoul-subway-arrival",
+      "name_ko": "서울 지하철 도착정보 조회",
+      "category": "transport",
+      "command": "/seoul-subway-arrival",
+      "description_ko": "지하에 달리는 철마의 도착 시각이 궁금하오? 역명을 일러주시오. 짐이 실시간 도착 정보를 가져다 보여드리겠소. 어느 열차가 가까이 오고 있는지 낱낱이 알 수 있소.",
+      "features_ko": ["실시간 도착 정보", "역별 열차 조회", "호선별 검색"],
+      "deprecated": false
+    },
+    {
+      "id": "subway-lost-property",
+      "name_ko": "지하철 분실물 조회",
+      "category": "transport",
+      "command": "/subway-lost-property",
+      "description_ko": "지하철에 물건을 두고 내렸소? 짐이 LOST112와 서울교통공사의 분실물 기록을 살펴드리겠소. 역명과 물품명을 일러주시면 찾을 길을 안내해 드리리라.",
+      "features_ko": ["분실물 조회", "역별 검색", "물품명 검색", "신고 안내"],
+      "deprecated": false
+    },
+    {
+      "id": "delivery-tracking",
+      "name_ko": "택배 배송조회",
+      "category": "transport",
+      "command": "/delivery-tracking",
+      "description_ko": "그대가 기다리는 물건이 어디쯤 왔는지 궁금하오? 운송장 번호를 일러주시오. 짐이 CJ대한통운과 우체국의 배송 기록을 찾아 현재 위치를 보여드리겠소.",
+      "features_ko": ["CJ대한통운 조회", "우체국 조회", "배송 단계 확인"],
+      "deprecated": false
+    },
+    {
+      "id": "hipass-receipt",
+      "name_ko": "하이패스 영수증 발급",
+      "category": "transport",
+      "command": "/hipass-receipt",
+      "description_ko": "통행료 영수증이 필요하오? 그대가 직접 로그인한 하이패스 홈페이지에서 짐이 사용내역을 찾아드리겠소. 영수증 팝업까지 안내해 드리리라.",
+      "features_ko": ["사용내역 조회", "영수증 팝업 진입", "기간별 검색"],
+      "deprecated": false
+    },
+    {
+      "id": "public-restroom-nearby",
+      "name_ko": "근처 공중화장실 찾기",
+      "category": "food-life",
+      "command": "/public-restroom-nearby",
+      "description_ko": "급한 일이 생겼소? 그대의 위치를 알려주시오. 짐이 전국 공중화장실 공식 자료를 뒤져 가장 가까운 곳을 찾아드리겠소. 백성의 불편을 짐이 외면할 수 없소.",
+      "features_ko": ["근처 화장실 검색", "개방 여부 확인", "위치 안내"],
+      "deprecated": false
+    },
+    {
+      "id": "kakao-bar-nearby",
+      "name_ko": "근처 술집 조회",
+      "category": "food-life",
+      "command": "/kakao-bar-nearby",
+      "description_ko": "오늘 밤 한잔 기울이고 싶소? 그대의 위치를 일러주시오. 짐이 카카오 지도를 살펴 지금 문을 연 술집을 찾아드리겠소. 메뉴와 좌석 정보까지 함께 보여드리리라.",
+      "features_ko": ["근처 술집 검색", "영업 중 필터", "메뉴 및 좌석 정보"],
+      "deprecated": false
+    },
+    {
+      "id": "household-waste-info",
+      "name_ko": "생활쓰레기 배출정보 조회",
+      "category": "food-life",
+      "command": "/household-waste-info",
+      "description_ko": "쓰레기를 언제, 어디에 내놓아야 하는지 모르겠소? 시군구를 일러주시오. 짐이 공공 자료를 찾아 배출 요일과 장소를 알려드리겠소.",
+      "features_ko": ["지역별 배출 요일", "배출 장소 안내", "품목별 분리수거 정보"],
+      "deprecated": false
+    },
+    {
+      "id": "hola-poke-yeoksam",
+      "name_ko": "올라포케 역삼점",
+      "category": "food-life",
+      "command": "/hola-poke-yeoksam",
+      "description_ko": "역삼(驛三)에 있는 올라포케 매장의 메뉴가 궁금하오? 짐이 공식 MCP 서버를 통해 메뉴와 매장 정보를 낱낱이 보여드리겠소. 이벤트 참여 방법도 안내해 드리리라.",
+      "features_ko": ["메뉴 조회", "매장 정보", "이벤트 안내"],
+      "deprecated": false
+    },
+    {
+      "id": "kakaotalk-mac",
+      "name_ko": "카카오톡 Mac CLI",
+      "category": "food-life",
+      "command": "/kakaotalk-mac",
+      "description_ko": "Mac에서 카카오톡 대화를 살펴보고 싶소? 짐이 kakaocli를 통해 채팅 내역을 읽고 메시지를 검색해 드리겠소. 답장을 보내기 전에 반드시 그대의 확인을 받겠소.",
+      "features_ko": ["채팅 내역 조회", "메시지 검색", "답장 전송 (확인 후)"],
+      "deprecated": false
+    },
+    {
+      "id": "k-schoollunch-menu",
+      "name_ko": "학교 급식 식단 조회",
+      "category": "food-life",
+      "command": "/k-schoollunch-menu",
+      "description_ko": "오늘 학교 급식이 무엇인지 궁금하오? 교육청과 학교 이름을 일러주시오. 짐이 NEIS의 기록을 찾아 오늘의 식단을 보여드리겠소.",
+      "features_ko": ["학교별 식단 조회", "날짜별 검색", "교육청별 검색"],
+      "deprecated": false
+    },
+    {
+      "id": "blue-ribbon-nearby",
+      "name_ko": "근처 블루리본 맛집",
+      "category": "food-life",
+      "command": "/blue-ribbon-nearby",
+      "description_ko": "한때 짐이 좋아하던 도구이나, 지금은 길이 막혀 쓰기 어렵소. 다른 도구를 살펴보시오.",
+      "features_ko": ["블루리본 맛집 검색", "위치 기반 조회"],
+      "deprecated": true
+    },
+    {
+      "id": "daiso-product-search",
+      "name_ko": "다이소 상품 조회",
+      "category": "shopping",
+      "command": "/daiso-product-search",
+      "description_ko": "다이소에서 원하는 물건을 찾고 싶소? 매장 이름과 상품명을 일러주시오. 짐이 공식 다이소몰을 살펴 재고 여부를 확인해 드리겠소.",
+      "features_ko": ["매장별 상품 검색", "재고 확인", "상품 상세 조회"],
+      "deprecated": false
+    },
+    {
+      "id": "market-kurly-search",
+      "name_ko": "마켓컬리 상품 조회",
+      "category": "shopping",
+      "command": "/market-kurly-search",
+      "description_ko": "마켓컬리에서 신선한 식재료나 생필품을 찾고 싶소? 짐이 로그인 없이도 상품을 검색하고 현재 가격과 할인 여부를 보여드리겠소. 품절 여부도 함께 확인해 드리리라.",
+      "features_ko": ["상품 검색", "가격 및 할인 확인", "품절 여부 조회"],
+      "deprecated": false
+    },
+    {
+      "id": "bunjang-search",
+      "name_ko": "번개장터 검색",
+      "category": "shopping",
+      "command": "/bunjang-search",
+      "description_ko": "중고 물건을 사고팔고 싶소? 짐이 번개장터를 뒤져 그대가 원하는 상품을 찾아드리겠소. 상세 조회와 찜, 채팅까지 안내해 드리리라.",
+      "features_ko": ["상품 검색", "상세 조회", "찜 및 채팅", "대량 수집"],
+      "deprecated": false
+    },
+    {
+      "id": "olive-young-search",
+      "name_ko": "올리브영 검색",
+      "category": "shopping",
+      "command": "/olive-young-search",
+      "description_ko": "올리브영에서 화장품이나 건강 용품을 찾고 싶소? 짐이 매장을 검색하고 상품 재고를 확인해 드리겠소. 그대가 원하는 물건이 가까운 매장에 있는지 알 수 있소.",
+      "features_ko": ["매장 검색", "상품 검색", "재고 확인"],
+      "deprecated": false
+    },
+    {
+      "id": "coupang-product-search",
+      "name_ko": "쿠팡 상품 검색",
+      "category": "shopping",
+      "command": "/coupang-product-search",
+      "description_ko": "쿠팡에서 물건을 찾고 싶소? 짐이 로켓배송 필터와 가격대 검색으로 최적의 상품을 골라드리겠소. 베스트 상품과 골드박스 특가도 함께 살펴드리리라.",
+      "features_ko": ["상품 검색", "로켓배송 필터", "가격대 검색", "골드박스 특가"],
+      "deprecated": false
+    },
+    {
+      "id": "fine-dust-location",
+      "name_ko": "사용자 위치 미세먼지 조회",
+      "category": "gov-public",
+      "command": "/fine-dust-location",
+      "description_ko": "오늘 하늘이 맑은지 궁금하오? 지역명을 일러주시오. 짐이 에어코리아의 공식 자료를 가져다 미세먼지와 초미세먼지 수치를 보여드리겠소.",
+      "features_ko": ["지역별 미세먼지 조회", "초미세먼지 확인", "등급 안내"],
+      "deprecated": false
+    },
+    {
+      "id": "mfds-food-safety",
+      "name_ko": "식품 안전 체크",
+      "category": "gov-public",
+      "command": "/mfds-food-safety",
+      "description_ko": "먹은 음식이 걱정되오? 짐이 먼저 증상과 섭취 상황을 여쭤보겠소. 그런 다음 식품안전나라의 공식 자료를 살펴 안전 여부를 알려드리리라.",
+      "features_ko": ["식품 안전 조회", "증상 기반 인터뷰", "식약처 공식 자료"],
+      "deprecated": false
+    },
+    {
+      "id": "zipcode-search",
+      "name_ko": "우편번호 검색",
+      "category": "gov-public",
+      "command": "/zipcode-search",
+      "description_ko": "주소의 우편번호가 필요하오? 짐이 우체국 공식 통합 검색을 통해 정확한 우편번호와 영문 주소를 찾아드리겠소.",
+      "features_ko": ["우편번호 조회", "영문 주소 확인", "주소 검색"],
+      "deprecated": false
+    },
+    {
+      "id": "mfds-drug-safety",
+      "name_ko": "의약품 안전 체크",
+      "category": "gov-public",
+      "command": "/mfds-drug-safety",
+      "description_ko": "복용 중인 약이 걱정되오? 짐이 먼저 증상과 복용 상황을 여쭤보겠소. 식약처 공공 자료를 살펴 의약품의 안전 정보를 알려드리리라.",
+      "features_ko": ["의약품 안전 조회", "증상 기반 인터뷰", "식약처 공식 자료"],
+      "deprecated": false
+    },
+    {
+      "id": "korean-scholarship-search",
+      "name_ko": "장학금 검색 및 조회",
+      "category": "gov-public",
+      "command": "/korean-scholarship-search",
+      "description_ko": "학문을 닦고자 하나 재정이 부족하오? 짐이 한국장학재단과 각 대학, 기업의 장학금 공고를 뒤져드리겠소. 학교와 소득 분위, 학생 유형에 맞는 장학금을 골라드리리라.",
+      "features_ko": ["장학금 공고 검색", "학교별 필터", "소득 분위 필터", "금액 및 자격 확인"],
+      "deprecated": false
+    },
+    {
+      "id": "han-river-water-level",
+      "name_ko": "한강 수위 정보 조회",
+      "category": "gov-public",
+      "command": "/han-river-water-level",
+      "description_ko": "한강(漢江)은 도성의 젖줄이오. 그대가 강의 수위가 궁금하다면, 관측소의 기록을 가져다 보여드리겠소. 관측소명이나 코드를 일러주시면 현재 수위와 유량을 알 수 있소.",
+      "features_ko": ["관측소별 수위 조회", "유량 확인", "관측소 코드 검색"],
+      "deprecated": false
+    },
+    {
+      "id": "korea-weather",
+      "name_ko": "한국 날씨 조회",
+      "category": "gov-public",
+      "command": "/korea-weather",
+      "description_ko": "오늘 날씨가 어떠한지 궁금하오? 짐이 기상청 단기예보 자료를 살펴 그대의 지역 날씨를 요약해 드리겠소. 우산이 필요한지도 알 수 있소.",
+      "features_ko": ["지역별 날씨 조회", "단기예보 요약", "강수 여부 확인"],
+      "deprecated": false
+    },
+    {
+      "id": "korean-law-search",
+      "name_ko": "한국 법령 검색",
+      "category": "gov-public",
+      "command": "/korean-law-search",
+      "description_ko": "법령이 궁금하오? 짐이 다스리는 나라의 법은 백성 모두가 알아야 하오. 한국 법령 MCP를 통해 원하는 법률을 찾아드리겠소. 서비스가 막히면 법망(法網)을 통해 대신 찾아드리리라.",
+      "features_ko": ["법령 검색", "조문 조회", "법령 상세 확인"],
+      "deprecated": false
+    },
+    {
+      "id": "kbl-results",
+      "name_ko": "KBL 경기 결과 조회",
+      "category": "sports-ent",
+      "command": "/kbl-results",
+      "description_ko": "한국 프로농구 경기 결과가 궁금하오? 짐이 날짜와 팀을 기준으로 경기 결과와 현재 순위를 찾아드리겠소. 공식 KBL 자료를 바탕으로 하오.",
+      "features_ko": ["경기 결과 조회", "팀 순위 확인", "날짜별 검색"],
+      "deprecated": false
+    },
+    {
+      "id": "kbo-results",
+      "name_ko": "KBO 경기 결과 조회",
+      "category": "sports-ent",
+      "command": "/kbo-results",
+      "description_ko": "오늘 야구 경기 결과가 어떠하오? 짐이 날짜를 기준으로 KBO 경기 일정과 점수를 찾아드리겠소. 어제 경기도, 오늘 경기도 모두 살펴드리리라.",
+      "features_ko": ["경기 일정 조회", "점수 확인", "날짜별 검색"],
+      "deprecated": false
+    },
+    {
+      "id": "kleague-results",
+      "name_ko": "K리그 경기 결과 조회",
+      "category": "sports-ent",
+      "command": "/kleague-results",
+      "description_ko": "K리그 경기 결과와 순위가 궁금하오? 짐이 날짜와 팀을 기준으로 공식 자료를 찾아드리겠소. 현재 리그 순위도 함께 보여드리리라.",
+      "features_ko": ["경기 결과 조회", "리그 순위 확인", "팀별 검색"],
+      "deprecated": false
+    },
+    {
+      "id": "lck-analytics",
+      "name_ko": "LCK 경기 분석",
+      "category": "sports-ent",
+      "command": "/lck-analytics",
+      "description_ko": "LCK 경기를 깊이 살펴보고 싶소? 짐이 Riot 공식 자료와 역대 기록을 바탕으로 경기 결과, 현재 순위, 밴픽 분석까지 보여드리겠소. 패치 메타와 팀 파워 레이팅도 알 수 있소.",
+      "features_ko": ["경기 결과 조회", "팀 순위 확인", "밴픽 분석", "패치 메타 조회"],
+      "deprecated": false
+    },
+    {
+      "id": "hwp",
+      "name_ko": "HWP 문서 처리",
+      "category": "docs-search",
+      "command": "/hwp",
+      "description_ko": "한글(HWP) 문서를 다루어야 하오? 짐이 kordoc을 통해 HWP와 HWPX 문서를 읽고 내용을 추출해 드리겠소. 양식을 채우거나 마크다운을 HWPX로 변환하는 일도 할 수 있소.",
+      "features_ko": ["HWP 문서 파싱", "내용 추출", "양식 작성", "마크다운 변환"],
+      "deprecated": false
+    },
+    {
+      "id": "geeknews-search",
+      "name_ko": "긱뉴스 조회",
+      "category": "docs-search",
+      "command": "/geeknews-search",
+      "description_ko": "기술 소식이 궁금하오? 짐이 긱뉴스의 공개 피드를 살펴 최신 게시물을 찾아드리겠소. 검색하고 상세 내용을 확인하는 일도 할 수 있소.",
+      "features_ko": ["최신 게시물 조회", "키워드 검색", "상세 내용 확인"],
+      "deprecated": false
+    },
+    {
+      "id": "naver-blog-research",
+      "name_ko": "네이버 블로그 리서치",
+      "category": "docs-search",
+      "command": "/naver-blog-research",
+      "description_ko": "네이버 블로그에서 정보를 찾고 싶소? 짐이 API 키 없이도 블로그를 검색하고 전체 글 내용을 읽어드리겠소. 이미지도 내려받을 수 있소.",
+      "features_ko": ["블로그 검색", "전체 글 읽기", "이미지 다운로드"],
+      "deprecated": false
+    },
+    {
+      "id": "joseon-sillok-search",
+      "name_ko": "조선왕조실록 검색",
+      "category": "docs-search",
+      "command": "/joseon-sillok-search",
+      "description_ko": "짐의 선조들이 쌓으신 기록이니, 그대가 원하는 시대와 왕을 일러주시오. 친히 실록을 펼쳐 보이리라. 키워드로 검색하고 왕과 연도로 좁혀 찾을 수 있소.",
+      "features_ko": ["키워드 검색", "왕별 검색", "연도별 검색", "기록 상세 조회"],
+      "deprecated": false
+    },
+    {
+      "id": "korean-patent-search",
+      "name_ko": "한국 특허 정보 검색",
+      "category": "docs-search",
+      "command": "/korean-patent-search",
+      "description_ko": "새로운 발명을 보호받고 싶소, 아니면 기존 특허를 살펴보고 싶소? 짐이 KIPRIS Plus 공식 자료를 통해 특허와 실용신안을 검색해 드리겠소. 출원번호로 상세 내용도 확인할 수 있소.",
+      "features_ko": ["특허 키워드 검색", "실용신안 검색", "출원번호 상세 조회"],
+      "deprecated": false
+    },
+    {
+      "id": "korean-character-count",
+      "name_ko": "한국어 글자 수 세기",
+      "category": "docs-search",
+      "command": "/korean-character-count",
+      "description_ko": "자기소개서나 양식에 글자 수 제한이 있소? 짐이 정확하게 글자 수를 세어드리겠소. 자소(字素), 줄 수, 바이트까지 빠짐없이 알려드리리라.",
+      "features_ko": ["글자 수 계산", "줄 수 확인", "바이트 계산", "자소 단위 계산"],
+      "deprecated": false
+    },
+    {
+      "id": "korean-spell-check",
+      "name_ko": "한국어 맞춤법 검사",
+      "category": "docs-search",
+      "command": "/korean-spell-check",
+      "description_ko": "훈민정음을 창제한 이 왕 앞에서 그대의 글을 바로잡아 드리겠소. 백성이 편히 읽을 수 있는 글로 다듬어 보이리라. 긴 글도 나누어 꼼꼼히 살펴드리겠소.",
+      "features_ko": ["맞춤법 검사", "교정 제안", "긴 글 분할 처리"],
+      "deprecated": false
+    },
+    {
+      "id": "used-car-price-search",
+      "name_ko": "중고차 가격 조회",
+      "category": "real-estate-finance",
+      "command": "/used-car-price-search",
+      "description_ko": "중고차를 사고 싶소? 짐이 주요 렌터카 업체를 비교하고 SK렌터카 다이렉트 타고BUY의 재고를 살펴 가격과 인수가를 알려드리겠소.",
+      "features_ko": ["중고차 가격 조회", "인수가 확인", "렌터카 업체 비교"],
+      "deprecated": false
+    },
+    {
+      "id": "toss-securities",
+      "name_ko": "토스증권 조회",
+      "category": "real-estate-finance",
+      "command": "/toss-securities",
+      "description_ko": "토스증권 계좌를 살펴보고 싶소? 짐이 tossctl을 통해 계좌 요약과 포트폴리오, 시세, 주문 내역을 안전하게 조회해 드리겠소. 읽기 전용으로만 살펴드리리라.",
+      "features_ko": ["계좌 요약 조회", "포트폴리오 확인", "시세 조회", "주문 내역 확인"],
+      "deprecated": false
+    },
+    {
+      "id": "real-estate-search",
+      "name_ko": "한국 부동산 실거래가 조회",
+      "category": "real-estate-finance",
+      "command": "/real-estate-search",
+      "description_ko": "집을 사거나 전세를 구하고 싶소? 짐이 국토교통부 공공 자료를 바탕으로 아파트, 오피스텔, 빌라, 단독주택의 실거래가와 전월세 정보를 찾아드리겠소.",
+      "features_ko": ["아파트 실거래가 조회", "전월세 정보 확인", "오피스텔 및 빌라 조회"],
+      "deprecated": false
+    },
+    {
+      "id": "korean-stock-search",
+      "name_ko": "한국 주식 정보 조회",
+      "category": "real-estate-finance",
+      "command": "/korean-stock-search",
+      "description_ko": "한국 주식 시장이 궁금하오? 짐이 KRX 공식 자료를 통해 상장 종목을 검색하고 일별 거래 현황을 보여드리겠소. API 키 없이도 살펴볼 수 있소.",
+      "features_ko": ["종목 검색", "KRX 기본 정보 조회", "일별 거래 현황"],
+      "deprecated": false
+    },
+    {
+      "id": "k-skill-setup",
+      "name_ko": "K-Skill 설정",
+      "category": "misc",
+      "command": "/k-skill-setup",
+      "description_ko": "K-Skill 묶음을 설치한 뒤 설정을 갖추고 싶소? 짐이 공통 설정을 안내하고 검증해 드리겠소. 업데이트 확인과 GitHub 별표 등록도 그대의 동의를 받아 처리해 드리리라.",
+      "features_ko": ["설치 후 설정 안내", "설정 검증", "업데이트 확인"],
+      "deprecated": false
+    },
+    {
+      "id": "lotto-results",
+      "name_ko": "로또 당첨 확인",
+      "category": "misc",
+      "command": "/lotto-results",
+      "description_ko": "운세가 어떠한지 살펴보고 싶소? 짐이 당첨번호를 일러드리겠소. 천운(天運)이 그대 편이기를 바라오. 최신 회차와 당첨금 내역, 그대의 번호가 맞는지도 확인해 드리리라.",
+      "features_ko": ["당첨번호 조회", "최신 회차 확인", "당첨금 내역", "번호 매칭 확인"],
+      "deprecated": false
+    }
+  ]
+}

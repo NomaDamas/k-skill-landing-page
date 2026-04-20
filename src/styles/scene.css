@@ -1,0 +1,824 @@
+/* =============================================================
+ * scene.css — Joseon throne room (Civ5 Sejong stage)
+ *
+ * Pure CSS + inline SVG. No raster assets, no external URLs.
+ * All color / z-index / timing tokens sourced from main.css.
+ *
+ * Layer order (near → far along z):
+ *   backdrop (1)  →  floor (3)  →  throne-dais (4)  →
+ *   sejong (5)    →  pillars (8) → dancheong-band (10) →
+ *   lanterns (11) →  vignette (20)
+ * ============================================================= */
+
+/* -------------------------------------------------------------
+ * Stage container — full viewport, sealed
+ * ------------------------------------------------------------- */
+#scene {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: var(--z-scene, 1);
+  isolation: isolate;
+  font-family: var(--font-royal);
+  background-color: var(--ink-black);
+  background-image: url('../assets/palace-bg.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transition: filter 2.4s ease-out;
+  filter: brightness(0.45);
+}
+
+body:not([data-state="door_opening"]) #scene {
+  filter: brightness(1);
+}
+
+/* Baked into palace-bg.png — DOM kept for a11y. */
+#scene .palace-backdrop,
+#scene .mountain-painting,
+#scene .palace-pillar,
+#scene .hanji-window,
+#scene .lantern,
+#scene .dancheong-band,
+#scene .palace-floor,
+#scene .throne-dais,
+#scene .throne-back,
+#scene .throne-seat,
+#scene .sejong-figure {
+  display: none;
+}
+
+/* -------------------------------------------------------------
+ * 1. Backdrop — sky + mountain painting zone
+ * ------------------------------------------------------------- */
+#scene .palace-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 27%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* -------------------------------------------------------------
+ * 2. Mountain painting — stylized peaks, sky gradient, sun disc
+ * ------------------------------------------------------------- */
+#scene .mountain-painting {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 50% 36%,
+      var(--hanji-cream) 0%,
+      var(--hanji-cream) 2.4%,
+      rgba(250, 240, 230, 0.35) 2.8%,
+      transparent 4.5%
+    ),
+    radial-gradient(
+      ellipse 32% 5% at 22% 42%,
+      rgba(245, 245, 245, 0.55) 0%,
+      transparent 75%
+    ),
+    radial-gradient(
+      ellipse 24% 4% at 72% 48%,
+      rgba(245, 245, 245, 0.45) 0%,
+      transparent 75%
+    ),
+    radial-gradient(
+      ellipse 20% 3% at 42% 30%,
+      rgba(245, 245, 245, 0.3) 0%,
+      transparent 75%
+    ),
+    linear-gradient(
+      180deg,
+      #1d2b4d 0%,
+      #2a4472 25%,
+      #557aa0 55%,
+      #a9bfd2 80%,
+      #d9c7a3 100%
+    );
+  transition: filter 2.4s ease-out;
+}
+
+body:not([data-state="door_opening"]) #scene .mountain-painting {
+  filter: brightness(1.32) saturate(1.18);
+}
+
+/* Far mountain range — dancheong blue, jagged silhouette */
+#scene .mountain-painting::before {
+  content: '';
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  bottom: 0;
+  height: 56%;
+  background:
+    linear-gradient(
+      180deg,
+      var(--dancheong-blue) 0%,
+      #243a6a 45%,
+      #15254a 100%
+    );
+  clip-path: polygon(
+    0% 72%,  6% 55%, 12% 68%, 18% 40%, 24% 58%,
+    30% 32%, 36% 52%, 42% 25%, 48% 48%, 54% 30%,
+    60% 52%, 66% 28%, 72% 50%, 78% 35%, 84% 55%,
+    90% 40%, 96% 58%, 100% 48%,
+    100% 100%, 0% 100%
+  );
+  opacity: 0.85;
+  filter: drop-shadow(0 -2px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* Near foothills — dancheong green, lower jagged silhouette */
+#scene .mountain-painting::after {
+  content: '';
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  bottom: 0;
+  height: 40%;
+  background:
+    linear-gradient(
+      180deg,
+      var(--dancheong-green) 0%,
+      #0e3f18 50%,
+      #04220a 100%
+    );
+  clip-path: polygon(
+    0% 78%,   8% 55%, 15% 72%, 22% 42%, 30% 65%,
+    38% 38%, 46% 60%, 54% 32%, 62% 58%, 70% 35%,
+    78% 60%, 86% 45%, 94% 62%, 100% 52%,
+    100% 100%, 0% 100%
+  );
+  opacity: 0.92;
+  filter: drop-shadow(0 -4px 10px rgba(0, 0, 0, 0.45));
+}
+
+/* -------------------------------------------------------------
+ * 3. Hanji windows — paper-lattice side panels
+ * ------------------------------------------------------------- */
+#scene .hanji-window {
+  position: absolute;
+  top: 14%;
+  width: 13%;
+  height: 46%;
+  background:
+    /* Cross-lattice horizontal */
+    repeating-linear-gradient(
+      0deg,
+      rgba(92, 64, 51, 0.85) 0 2px,
+      transparent 2px 14%
+    ),
+    /* Cross-lattice vertical */
+    repeating-linear-gradient(
+      90deg,
+      rgba(92, 64, 51, 0.85) 0 2px,
+      transparent 2px 20%
+    ),
+    /* Secondary fine diagonal hanji weave */
+    repeating-linear-gradient(
+      45deg,
+      rgba(198, 158, 108, 0.15) 0 1px,
+      transparent 1px 6px
+    ),
+    /* Warm paper glow */
+    radial-gradient(
+      ellipse at center,
+      #fae09a 0%,
+      #e6b858 55%,
+      #8a5f1e 100%
+    );
+  border: 4px solid var(--wood-dark);
+  border-radius: 3px;
+  box-shadow:
+    inset 0 0 40px rgba(244, 208, 63, 0.45),
+    inset 0 0 8px rgba(255, 240, 180, 0.3),
+    0 0 30px rgba(244, 208, 63, 0.25),
+    0 4px 12px rgba(0, 0, 0, 0.55);
+  z-index: 2;
+}
+
+#scene .hanji-left  { left: 9.5%; }
+#scene .hanji-right { right: 9.5%; }
+
+/* -------------------------------------------------------------
+ * 4. Dancheong band — top royal geometric frieze
+ * ------------------------------------------------------------- */
+#scene .dancheong-band {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6.5%;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      var(--palace-red)       0    22px,
+      var(--gold)            22px  28px,
+      var(--dancheong-blue)  28px  54px,
+      var(--gold)            54px  60px,
+      var(--dancheong-green) 60px  86px,
+      var(--gold)            86px  92px,
+      var(--palace-red)      92px 118px,
+      var(--gold)           118px 124px,
+      var(--dancheong-blue) 124px 150px,
+      var(--gold)           150px 156px,
+      var(--dancheong-green) 156px 182px,
+      var(--gold)           182px 188px
+    );
+  border-top: 3px solid var(--gold-deep);
+  border-bottom: 4px solid var(--gold-deep);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.6),
+    inset 0 0 20px rgba(0, 0, 0, 0.35);
+  z-index: 10;
+}
+
+/* Gold dotted sub-band for extra jewelry */
+#scene .dancheong-band::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -12px;
+  height: 8px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 10px,
+      var(--gold) 10px 13px,
+      transparent 13px 23px
+    );
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+
+/* -------------------------------------------------------------
+ * 5. Hanging lanterns — warm glow, thin cord, red tassel
+ * ------------------------------------------------------------- */
+#scene .lantern {
+  position: absolute;
+  top: 11%;
+  width: clamp(46px, 4.5vw, 72px);
+  height: clamp(58px, 5.6vw, 90px);
+  border-radius: 48% 48% 44% 44% / 50% 50% 40% 40%;
+  background:
+    radial-gradient(
+      ellipse at 38% 38%,
+      #fff9d6 0%,
+      var(--gold) 28%,
+      #cf9c16 65%,
+      var(--wood-dark) 100%
+    );
+  border: 1.5px solid var(--gold-deep);
+  box-shadow:
+    0 0 40px rgba(244, 208, 63, 0.9),
+    0 0 90px rgba(244, 208, 63, 0.45),
+    inset 0 -10px 18px rgba(0, 0, 0, 0.45),
+    inset 0 6px 14px rgba(255, 246, 204, 0.55);
+  z-index: 11;
+  animation: sceneLanternFlicker 4.2s var(--ease-dialogue, ease-in-out) infinite;
+}
+
+/* Hanging cord reaching up into the dancheong band */
+#scene .lantern::before {
+  content: '';
+  position: absolute;
+  top: -120%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 120%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(13, 13, 13, 0.85) 25%,
+    var(--ink-black) 100%
+  );
+}
+
+/* Tassel hanging off the bottom of the lantern */
+#scene .lantern::after {
+  content: '';
+  position: absolute;
+  bottom: -28%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18%;
+  height: 24%;
+  background: linear-gradient(
+    180deg,
+    var(--palace-red) 0%,
+    var(--throne-red) 100%
+  );
+  border-radius: 2px 2px 50% 50% / 2px 2px 80% 80%;
+  border: 1.5px solid var(--gold);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+}
+
+#scene .lantern-left  { left: 13%; }
+#scene .lantern-right { right: 13%; }
+
+@keyframes sceneLanternFlicker {
+  0%, 100% {
+    box-shadow:
+      0 0 40px rgba(244, 208, 63, 0.9),
+      0 0 90px rgba(244, 208, 63, 0.45),
+      inset 0 -10px 18px rgba(0, 0, 0, 0.45),
+      inset 0 6px 14px rgba(255, 246, 204, 0.55);
+  }
+  45% {
+    box-shadow:
+      0 0 56px rgba(244, 208, 63, 1),
+      0 0 120px rgba(244, 208, 63, 0.6),
+      inset 0 -10px 18px rgba(0, 0, 0, 0.4),
+      inset 0 6px 14px rgba(255, 246, 204, 0.7);
+  }
+  70% {
+    box-shadow:
+      0 0 34px rgba(244, 208, 63, 0.75),
+      0 0 80px rgba(244, 208, 63, 0.35),
+      inset 0 -10px 18px rgba(0, 0, 0, 0.5),
+      inset 0 6px 14px rgba(255, 246, 204, 0.5);
+  }
+}
+
+/* -------------------------------------------------------------
+ * 6. Palace pillars — red lacquered columns with gold rings
+ * ------------------------------------------------------------- */
+#scene .palace-pillar {
+  position: absolute;
+  top: 6.5%;
+  bottom: 0;
+  width: 5.5%;
+  background:
+    /* Highlight column center */
+    linear-gradient(
+      90deg,
+      var(--shadow-black) 0%,
+      var(--wood-dark) 10%,
+      var(--palace-red) 32%,
+      #e24254 50%,
+      var(--palace-red) 68%,
+      var(--wood-dark) 90%,
+      var(--shadow-black) 100%
+    );
+  box-shadow:
+    inset 0 0 30px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(0, 0, 0, 0.55);
+  z-index: 8;
+}
+
+#scene .pillar-left  { left: 0; }
+#scene .pillar-right { right: 0; }
+
+/* Gold rings on each pillar (top and lower) */
+#scene .palace-pillar::before,
+#scene .palace-pillar::after {
+  content: '';
+  position: absolute;
+  left: -8%;
+  right: -8%;
+  height: clamp(14px, 2%, 22px);
+  background:
+    linear-gradient(
+      180deg,
+      var(--gold-deep) 0%,
+      var(--gold) 40%,
+      #fff3a8 50%,
+      var(--gold) 60%,
+      var(--gold-deep) 100%
+    );
+  border-top: 2px solid var(--gold-deep);
+  border-bottom: 2px solid var(--gold-deep);
+  box-shadow:
+    0 0 14px rgba(244, 208, 63, 0.75),
+    inset 0 0 8px rgba(0, 0, 0, 0.35);
+}
+
+#scene .palace-pillar::before { top: 16%; }
+#scene .palace-pillar::after  { bottom: 30%; }
+
+/* -------------------------------------------------------------
+ * 7. Palace floor — wooden planks with perspective cues
+ * ------------------------------------------------------------- */
+#scene .palace-floor {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 27%;
+  background:
+    /* Horizontal plank seams — spaced to suggest receding depth */
+    linear-gradient(
+      180deg,
+      transparent 0 7%,    rgba(0, 0, 0, 0.45) 7% 7.3%,
+      transparent 7.3% 18%, rgba(0, 0, 0, 0.45) 18% 18.4%,
+      transparent 18.4% 34%, rgba(0, 0, 0, 0.5) 34% 34.5%,
+      transparent 34.5% 54%, rgba(0, 0, 0, 0.55) 54% 54.6%,
+      transparent 54.6% 78%, rgba(0, 0, 0, 0.6) 78% 78.8%,
+      transparent 78.8% 100%
+    ),
+    /* Vertical plank grain */
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.22) 0 1px,
+      transparent 1px 7.5%
+    ),
+    /* Base wood color gradient — dark at far, warm toward viewer */
+    linear-gradient(
+      180deg,
+      #1a0f08 0%,
+      var(--wood-dark) 18%,
+      #7a4820 48%,
+      var(--wood-light) 78%,
+      #3a2616 100%
+    );
+  z-index: 3;
+  box-shadow:
+    inset 0 18px 40px rgba(0, 0, 0, 0.75),
+    inset 0 -10px 28px rgba(0, 0, 0, 0.5);
+}
+
+/* Glowing horizon line where floor meets backdrop */
+#scene .palace-floor::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--gold-deep) 25%,
+      var(--gold) 50%,
+      var(--gold-deep) 75%,
+      transparent 100%
+    );
+  filter: blur(0.4px);
+  box-shadow: 0 0 14px rgba(244, 208, 63, 0.5);
+}
+
+/* Ambient warm spotlight pooling on the floor in front of throne */
+#scene .palace-floor::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 40% 50% at 50% 80%,
+      rgba(244, 208, 63, 0.15) 0%,
+      transparent 70%
+    );
+  pointer-events: none;
+}
+
+/* -------------------------------------------------------------
+ * 8. Throne dais — layered stepped platform
+ * ------------------------------------------------------------- */
+#scene .throne-dais {
+  position: absolute;
+  bottom: 4.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 42%;
+  height: 60%;
+  z-index: 4;
+}
+
+/* Widest bottom step of the dais */
+#scene .throne-dais::before {
+  content: '';
+  position: absolute;
+  left: -28%;
+  right: -28%;
+  bottom: 0;
+  height: 9%;
+  background:
+    linear-gradient(
+      180deg,
+      #6a0404 0%,
+      var(--throne-red) 45%,
+      var(--shadow-black) 100%
+    );
+  border-top: 3px solid var(--gold-deep);
+  border-bottom: 3px solid var(--gold-deep);
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.75),
+    inset 0 2px 8px rgba(244, 208, 63, 0.2);
+}
+
+/* Middle step of the dais */
+#scene .throne-dais::after {
+  content: '';
+  position: absolute;
+  left: -12%;
+  right: -12%;
+  bottom: 9%;
+  height: 9%;
+  background:
+    linear-gradient(
+      180deg,
+      #7a0606 0%,
+      var(--throne-red) 45%,
+      #3a0000 100%
+    );
+  border-top: 3px solid var(--gold-deep);
+  border-bottom: 3px solid var(--gold-deep);
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.7),
+    inset 0 2px 8px rgba(244, 208, 63, 0.18);
+}
+
+/* -------------------------------------------------------------
+ * 9. Throne back — tall arched backrest with dancheong crown
+ * ------------------------------------------------------------- */
+#scene .throne-back {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 82%;
+  height: 78%;
+  background:
+    /* Inner warm light */
+    radial-gradient(
+      ellipse at 50% 30%,
+      rgba(244, 208, 63, 0.2) 0%,
+      transparent 55%
+    ),
+    /* Base throne color */
+    linear-gradient(
+      180deg,
+      var(--throne-red) 0%,
+      var(--palace-red) 42%,
+      var(--throne-red) 72%,
+      #4a0000 100%
+    );
+  border-radius: 50% 50% 8px 8px / 36% 36% 8px 8px;
+  border: 5px solid var(--gold);
+  box-shadow:
+    inset 0 0 50px rgba(0, 0, 0, 0.55),
+    inset 0 10px 30px rgba(244, 208, 63, 0.22),
+    0 0 60px rgba(198, 12, 48, 0.45),
+    0 12px 32px rgba(0, 0, 0, 0.65);
+}
+
+/* Dancheong frieze crowning the arch */
+#scene .throne-back::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 13%;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      var(--palace-red)      0   9px,
+      var(--gold)            9px 12px,
+      var(--dancheong-blue) 12px 21px,
+      var(--gold)           21px 24px,
+      var(--dancheong-green) 24px 33px,
+      var(--gold)           33px 36px
+    );
+  border-radius: 50% 50% 0 0 / 80% 80% 0 0;
+  border-bottom: 3px solid var(--gold-deep);
+  opacity: 0.96;
+}
+
+/* Dragon medallion high on backrest */
+#scene .throne-back::after {
+  content: '';
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle at 45% 40%,
+      #fff3a8 0%,
+      var(--gold) 35%,
+      var(--gold-deep) 75%,
+      #6b4a0a 100%
+    );
+  border: 3px solid var(--gold-deep);
+  box-shadow:
+    inset 0 0 16px rgba(0, 0, 0, 0.45),
+    0 0 24px rgba(244, 208, 63, 0.65);
+}
+
+/* -------------------------------------------------------------
+ * 10. Throne seat — gold-trimmed cushion ledge
+ * ------------------------------------------------------------- */
+#scene .throne-seat {
+  position: absolute;
+  bottom: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92%;
+  height: 3.6%;
+  background:
+    linear-gradient(
+      180deg,
+      var(--gold) 0%,
+      var(--gold-deep) 50%,
+      var(--shadow-black) 100%
+    );
+  border: 2px solid var(--gold-deep);
+  border-radius: 4px;
+  box-shadow:
+    inset 0 2px 10px rgba(255, 255, 255, 0.35),
+    0 4px 14px rgba(0, 0, 0, 0.65);
+  z-index: 2;
+}
+
+/* -------------------------------------------------------------
+ * 11. Sejong figure — SVG wrapper
+ * ------------------------------------------------------------- */
+#scene .sejong-figure {
+  position: absolute;
+  bottom: 8.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(220px, 23vw, 340px);
+  aspect-ratio: 200 / 320;
+  z-index: var(--z-sejong, 5);
+  filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.75));
+  pointer-events: none;
+  animation: sceneSejongBreath 6s var(--ease-royal, ease-in-out) infinite;
+}
+
+#scene .sejong-figure svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@keyframes sceneSejongBreath {
+  0%, 100% { transform: translate(-50%, 0); }
+  50%      { transform: translate(-50%, -1.5%); }
+}
+
+/* -------------------------------------------------------------
+ * 11.5 Hyeonpan — 경복궁 style hanging name plate "케이-스킬"
+ * ------------------------------------------------------------- */
+#scene .palace-hyeonpan {
+  position: absolute;
+  top: 8.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(260px, 22vw, 380px);
+  z-index: 12;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.4s ease-out 1.6s, transform 1.4s ease-out 1.6s;
+  transform-origin: top center;
+}
+
+body:not([data-state="door_opening"]) #scene .palace-hyeonpan {
+  opacity: 1;
+}
+
+#scene .palace-hyeonpan .hyeonpan-rope {
+  position: absolute;
+  top: -18px;
+  width: 5px;
+  height: 22px;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    var(--ink-black) 40%,
+    var(--wood-dark) 100%
+  );
+  box-shadow: 1px 0 1px rgba(0, 0, 0, 0.5);
+}
+#scene .palace-hyeonpan .hyeonpan-rope-left  { left: 22%; }
+#scene .palace-hyeonpan .hyeonpan-rope-right { right: 22%; }
+
+#scene .palace-hyeonpan .hyeonpan-board {
+  position: relative;
+  background:
+    radial-gradient(
+      ellipse at 50% 40%,
+      #2a1408 0%,
+      #1a0a04 60%,
+      #0a0402 100%
+    );
+  border: 5px solid var(--gold-deep);
+  border-radius: 6px;
+  padding: 0.95rem 1.6rem 1rem;
+  text-align: center;
+  box-shadow:
+    inset 0 0 28px rgba(0, 0, 0, 0.85),
+    inset 0 0 0 2px var(--gold),
+    0 10px 24px rgba(0, 0, 0, 0.7),
+    0 0 28px rgba(244, 208, 63, 0.32);
+}
+
+#scene .palace-hyeonpan .hyeonpan-board::before,
+#scene .palace-hyeonpan .hyeonpan-board::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: var(--gold);
+  border: 1.5px solid var(--gold-deep);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(244, 208, 63, 0.5);
+}
+#scene .palace-hyeonpan .hyeonpan-board::before {
+  top: -7px;
+  left: 22%;
+}
+#scene .palace-hyeonpan .hyeonpan-board::after {
+  top: -7px;
+  right: 22%;
+}
+
+#scene .palace-hyeonpan .hyeonpan-text {
+  display: inline-block;
+  font-family: 'Nanum Myeongjo', 'Noto Serif KR', serif;
+  font-weight: 800;
+  font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+  color: var(--gold);
+  letter-spacing: 0.32em;
+  padding-left: 0.32em;
+  text-shadow:
+    1px 1px 0 var(--gold-deep),
+    2px 2px 5px rgba(0, 0, 0, 0.85),
+    0 0 14px rgba(244, 208, 63, 0.45);
+  -webkit-text-stroke: 0.5px var(--gold-deep);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #scene .palace-hyeonpan {
+    transition: opacity 0.2s linear;
+  }
+}
+
+/* -------------------------------------------------------------
+ * 12. Vignette — cinematic edge darkening
+ * ------------------------------------------------------------- */
+#scene .palace-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+  background:
+    radial-gradient(
+      ellipse at 50% 58%,
+      transparent 18%,
+      rgba(0, 0, 0, 0.35) 55%,
+      rgba(0, 0, 0, 0.78) 88%,
+      rgba(0, 0, 0, 0.96) 100%
+    );
+  mix-blend-mode: multiply;
+  opacity: 1;
+  transition: opacity 2.4s ease-out, background 2.4s ease-out;
+}
+
+body:not([data-state="door_opening"]) #scene .palace-vignette {
+  opacity: 0.18;
+  background:
+    radial-gradient(
+      ellipse at 50% 58%,
+      transparent 45%,
+      rgba(20, 8, 4, 0.18) 75%,
+      rgba(10, 4, 2, 0.4) 95%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+}
+
+/* -------------------------------------------------------------
+ * Responsive refinements for wider 16:9 screens
+ * ------------------------------------------------------------- */
+@media (min-aspect-ratio: 16 / 10) {
+  #scene .throne-dais   { width: 38%; }
+  #scene .hanji-window  { width: 12%; }
+  #scene .sejong-figure { width: clamp(240px, 20vw, 360px); }
+}
+
+@media (max-aspect-ratio: 4 / 3) {
+  #scene .throne-dais   { width: 48%; }
+  #scene .hanji-window  { width: 15%; }
+}
+
+/* -------------------------------------------------------------
+ * Reduced motion — stop flicker + breath
+ * ------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  #scene .lantern,
+  #scene .sejong-figure {
+    animation: none;
+  }
+}

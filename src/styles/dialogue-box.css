@@ -1,0 +1,275 @@
+/* =============================================================
+ * dialogue-box.css — Civ5-Sejong dialogue surface
+ * Glass morphism · palace-red border · gold-deep inner trim
+ * Design tokens from main.css (single source of truth).
+ * ============================================================= */
+
+#dialogue-box {
+  position: fixed;
+  bottom: 3vh;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  width: min(92vw, 1100px);
+  min-height: 22vh;
+  max-height: min(46vh, calc(100vh - 6vh));
+
+  background: linear-gradient(180deg, rgba(13, 13, 13, 0.92) 0%, rgba(26, 26, 26, 0.88) 100%);
+  backdrop-filter: blur(18px) saturate(130%);
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+
+  border: 2px solid var(--palace-red);
+  border-radius: 12px;
+  box-shadow:
+    0 0 50px rgba(198, 12, 48, 0.45),
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 4px transparent,
+    inset 0 0 0 6px var(--gold-deep),
+    inset 0 1px 1px rgba(245, 245, 245, 0.1);
+
+  display: grid;
+  grid-template-columns: minmax(180px, 22%) 1fr;
+  grid-template-rows: 1fr;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+  overflow: hidden;
+
+  z-index: var(--z-dialogue, 50);
+
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.6s var(--ease-dialogue),
+    transform 0.6s var(--ease-dialogue);
+}
+
+#dialogue-box[data-visible="true"] {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* =============================================================
+ * Leader card — Taeguk + title, vertical gold divider
+ * ============================================================= */
+.dialogue-leader-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-right: 1px solid rgba(244, 208, 63, 0.3);
+  padding-right: 1rem;
+}
+
+.taeguk {
+  width: 70px;
+  height: 70px;
+  filter: drop-shadow(0 0 8px rgba(198, 12, 48, 0.4));
+  flex-shrink: 0;
+}
+
+.taeguk svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.leader-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.leader-name {
+  font-family: var(--font-royal);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--gold);
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  line-height: 1.3;
+}
+
+.leader-mood {
+  font-size: var(--font-size-xs);
+  color: var(--hanji-white);
+  opacity: 0.7;
+  letter-spacing: 0.1em;
+}
+
+/* =============================================================
+ * Content — text + choices column
+ * ============================================================= */
+.dialogue-content {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 1rem;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.dialogue-text {
+  font-family: var(--font-royal);
+  font-size: var(--font-size-lg);
+  line-height: 1.65;
+  color: var(--hanji-white);
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  word-break: keep-all;
+  white-space: pre-wrap;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-deep) transparent;
+  padding-right: 0.5rem;
+}
+
+.dialogue-text::-webkit-scrollbar { width: 8px; }
+.dialogue-text::-webkit-scrollbar-track { background: transparent; }
+.dialogue-text::-webkit-scrollbar-thumb {
+  background: var(--gold-deep);
+  border-radius: 4px;
+  opacity: 0.6;
+}
+
+.dialogue-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 0.8rem;
+  align-content: flex-start;
+  flex-shrink: 0;
+}
+
+/* =============================================================
+ * Choice buttons — palace-red → throne-red gradient, gold sheen
+ * ============================================================= */
+.choice-btn {
+  font-family: var(--font-royal);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--hanji-white);
+  background: linear-gradient(
+    180deg,
+    rgba(198, 12, 48, 0.6) 0%,
+    rgba(139, 0, 0, 0.8) 100%
+  );
+  border: 1px solid var(--palace-red);
+  border-radius: 6px;
+  padding: 0.55rem 1.1rem;
+  cursor: pointer;
+  transition:
+    background 0.25s var(--ease-dialogue),
+    border-color 0.25s var(--ease-dialogue),
+    box-shadow 0.25s var(--ease-dialogue),
+    color 0.25s var(--ease-dialogue);
+  letter-spacing: 0.02em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.choice-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(244, 208, 63, 0.25) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+  pointer-events: none;
+}
+
+.choice-btn:hover {
+  background: linear-gradient(180deg, var(--palace-red) 0%, var(--throne-red) 100%);
+  border-color: var(--gold);
+  box-shadow:
+    0 0 18px rgba(198, 12, 48, 0.7),
+    0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.choice-btn:hover::before {
+  transform: translateX(100%);
+}
+
+.choice-btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.choice-btn:active {
+  box-shadow:
+    0 0 10px rgba(198, 12, 48, 0.45),
+    0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.choice-btn[data-deprecated="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.choice-btn[data-deprecated="true"]:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* =============================================================
+ * Responsive — stack leader card above content on narrow screens
+ * ============================================================= */
+@media (max-width: 768px) {
+  #dialogue-box {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    padding: 1rem 1.2rem;
+    max-height: 55vh;
+  }
+
+  .dialogue-leader-card {
+    flex-direction: row;
+    justify-content: flex-start;
+    border-right: none;
+    border-bottom: 1px solid rgba(244, 208, 63, 0.3);
+    padding-right: 0;
+    padding-bottom: 0.6rem;
+  }
+
+  .leader-info {
+    align-items: flex-start;
+  }
+
+  .leader-name {
+    text-align: left;
+  }
+
+  .taeguk {
+    width: 56px;
+    height: 56px;
+  }
+
+  .dialogue-text {
+    font-size: var(--font-size-lg);
+  }
+}
+
+/* =============================================================
+ * Reduced motion — kill the slide-up reveal, keep fade only
+ * ============================================================= */
+@media (prefers-reduced-motion: reduce) {
+  #dialogue-box {
+    transform: translateX(-50%);
+    transition: opacity 0.2s linear;
+  }
+  #dialogue-box[data-visible="true"] {
+    transform: translateX(-50%);
+  }
+  .choice-btn,
+  .choice-btn::before {
+    transition: none;
+  }
+}
