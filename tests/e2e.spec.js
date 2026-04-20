@@ -48,7 +48,7 @@ test.describe('K-Skill Landing Page — Civ5 Sejong Throne', () => {
   test('reveals Sejong figure after door opens', async ({ page }) => {
     await waitForDoorOpen(page, 8000);
 
-    await expect(page.locator('#sejong')).toBeVisible();
+    await expect(page.locator('#scene')).toBeVisible();
     await expect(page.locator('[data-testid="leader-name"]')).toContainText(
       '한국 문명의 군주 세종대왕',
     );
