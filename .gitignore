@@ -4,11 +4,13 @@ dist
 
 test-results
 playwright-report
+.playwright-mcp
 tests/dim-audit
 tests/visual-tour
 tests/improvements-demo
 tests/live-demo
 tests/bg-generation
+tests/mobile-audit
 
 *.log
 npm-debug.log*
