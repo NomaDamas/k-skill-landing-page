@@ -3,13 +3,98 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>조선의 궁궐 — K-스킬 모음집</title>
+    <title>케이-스킬 (K-Skill) — 한국형 LLM 에이전트 스킬 모음 (44개 / 8 카테고리)</title>
+    <meta
+      name="description"
+      content="한국 서비스(교통·음식·쇼핑·정부·문서·부동산 등)를 Claude Code / Cursor / OpenCode 같은 LLM 에이전트가 자연어 슬래시 명령으로 호출할 수 있게 하는 한국형 스킬 모음. 44개 스킬, 8개 카테고리, 오픈소스(MIT)."
+    />
+    <link rel="canonical" href="https://k-skill.nomadamas.org/" />
+
+    <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLM-friendly index" />
+    <link rel="alternate" type="text/markdown" href="/llms-full.txt" title="LLM full context" />
+    <link rel="alternate" type="application/json" href="/skills.json" title="Skills catalog (JSON)" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:site_name" content="케이-스킬 (K-Skill)" />
+    <meta property="og:url" content="https://k-skill.nomadamas.org/" />
+    <meta property="og:title" content="케이-스킬 — 한국형 LLM 에이전트 스킬 모음" />
+    <meta
+      property="og:description"
+      content="44개 스킬, 8개 카테고리. 한국 서비스를 LLM 에이전트가 자연어로 호출할 수 있게 합니다. NomaDamas 오픈소스(MIT)."
+    />
+    <meta property="og:image" content="https://k-skill.nomadamas.org/og-image.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="케이-스킬 — 한국형 LLM 에이전트 스킬 모음" />
+    <meta
+      name="twitter:description"
+      content="44개 스킬, 8개 카테고리. 한국 서비스를 LLM 에이전트가 자연어로 호출."
+    />
+    <meta name="twitter:image" content="https://k-skill.nomadamas.org/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareSourceCode",
+        "name": "K-Skill",
+        "alternateName": "케이-스킬",
+        "description": "Korean LLM agent skills collection — 44 self-contained skills across 8 categories for accessing Korean services via natural-language slash commands.",
+        "codeRepository": "https://github.com/NomaDamas/k-skill",
+        "url": "https://k-skill.nomadamas.org/",
+        "license": "https://opensource.org/licenses/MIT",
+        "programmingLanguage": ["Markdown", "JavaScript", "Python"],
+        "inLanguage": "ko",
+        "author": {
+          "@type": "Organization",
+          "name": "NomaDamas",
+          "url": "https://github.com/NomaDamas"
+        },
+        "keywords": "LLM, AI agent, Korean, skills, Claude Code, Cursor, OpenCode, MCP",
+        "potentialAction": {
+          "@type": "ConsumeAction",
+          "target": "https://k-skill.nomadamas.org/llms.txt"
+        }
+      }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+KR:wght@400;500;600;700;900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body data-state="door_opening">
     <div id="app"></div>
+    <noscript>
+      <main style="max-width:780px;margin:2rem auto;padding:1.5rem;font-family:system-ui,sans-serif;line-height:1.6;color:#1a1a1a;">
+        <h1 style="margin-top:0">케이-스킬 (K-Skill)</h1>
+        <p>
+          한국 서비스(교통·예약, 음식·생활, 쇼핑·가격, 정부·공공, 스포츠·엔터, 문서·검색, 부동산·금융 등)를
+          <strong>LLM 에이전트가 자연어 슬래시 명령으로 호출</strong>할 수 있게 하는 한국형 스킬 모음입니다.
+          44개 스킬, 8개 카테고리, 오픈소스(MIT).
+        </p>
+        <p>
+          이 페이지는 세종대왕 알현 컨셉의 <strong>인터랙티브 탐색기</strong>(JavaScript 필요)입니다.
+          JavaScript 없이도 아래 정적 자원으로 모든 정보에 접근할 수 있습니다.
+        </p>
+        <h2>주요 링크</h2>
+        <ul>
+          <li><a href="https://github.com/NomaDamas/k-skill"><strong>GitHub 저장소 (NomaDamas/k-skill)</strong></a></li>
+          <li><a href="/llms.txt">LLM 인덱스 (llms.txt) — 짧은 카탈로그 요약</a></li>
+          <li><a href="/llms-full.txt">전체 LLM 컨텍스트 (llms-full.txt) — 모든 스킬 상세 설명</a></li>
+          <li><a href="/skills.json">Raw JSON 카탈로그 (skills.json)</a></li>
+          <li><a href="/.well-known/agent.json">Agent 메타데이터 (.well-known/agent.json)</a></li>
+          <li><a href="/sitemap.xml">사이트맵 (sitemap.xml)</a></li>
+        </ul>
+        <h2>설치 (한 줄)</h2>
+        <pre style="background:#f4f4f4;padding:1rem;border-radius:4px;overflow-x:auto;"><code>npx --yes skills add NomaDamas/k-skill --all -g</code></pre>
+        <p style="margin-top:2rem;font-size:0.875rem;color:#666;">
+          NomaDamas · MIT License · <a href="https://k-skill.nomadamas.org/">k-skill.nomadamas.org</a>
+        </p>
+      </main>
+    </noscript>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

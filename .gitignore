@@ -32,3 +32,9 @@ Desktop.ini
 *.swo
 
 src/assets/palace-bg-v*.png
+
+public/llms.txt
+public/llms-full.txt
+public/skills.json
+public/sitemap.xml
+public/og-image.png

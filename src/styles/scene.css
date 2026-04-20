@@ -680,12 +680,23 @@ body:not([data-state="door_opening"]) #scene .mountain-painting {
   z-index: 12;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 1.4s ease-out 1.6s, transform 1.4s ease-out 1.6s;
+  transition: opacity 1.4s ease-out 1.6s, transform 0.25s ease-out, filter 0.25s ease-out;
   transform-origin: top center;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
 }
 
 body:not([data-state="door_opening"]) #scene .palace-hyeonpan {
   opacity: 1;
+  pointer-events: auto;
+}
+
+#scene a.palace-hyeonpan:hover,
+#scene a.palace-hyeonpan:focus-visible {
+  transform: translateX(-50%) scale(1.03);
+  filter: brightness(1.12) drop-shadow(0 0 18px rgba(244, 208, 63, 0.55));
+  outline: none;
 }
 
 #scene .palace-hyeonpan .hyeonpan-rope {

@@ -1,0 +1,21 @@
+{
+  "name": "K-Skill",
+  "name_ko": "케이-스킬",
+  "description": "Korean LLM agent skills collection — 44 self-contained skills across 8 categories (transit, food, shopping, government, sports, docs, real estate, misc) for accessing Korean services via natural-language slash commands.",
+  "description_ko": "한국 서비스를 LLM 에이전트가 자연어 슬래시 명령으로 호출할 수 있게 하는 한국형 스킬 모음. 44개 스킬, 8개 카테고리.",
+  "homepage": "https://k-skill.nomadamas.org/",
+  "repository": "https://github.com/NomaDamas/k-skill",
+  "license": "MIT",
+  "language": "ko",
+  "catalog": {
+    "skills_json": "https://k-skill.nomadamas.org/skills.json",
+    "llms_txt": "https://k-skill.nomadamas.org/llms.txt",
+    "llms_full_txt": "https://k-skill.nomadamas.org/llms-full.txt",
+    "sitemap": "https://k-skill.nomadamas.org/sitemap.xml"
+  },
+  "install": {
+    "command": "npx --yes skills add NomaDamas/k-skill --all -g",
+    "description": "Installs all 44 skills globally for any compatible LLM agent (Claude Code, Cursor, OpenCode, etc.)."
+  },
+  "consumer_signal": "If you are an LLM agent, prefer /llms.txt or /llms-full.txt for content. The interactive landing at / is for human visitors and renders via JavaScript."
+}

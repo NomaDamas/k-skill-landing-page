@@ -119,13 +119,17 @@ const SCENE_TEMPLATE = `
     <div class="lantern lantern-right"></div>
     <div class="dancheong-band"></div>
   </div>
-  <div id="hyeonpan" class="palace-hyeonpan" data-testid="hyeonpan" aria-label="케이-스킬 현판">
+  <a id="hyeonpan" class="palace-hyeonpan" data-testid="hyeonpan"
+     href="https://github.com/NomaDamas/k-skill"
+     target="_blank"
+     rel="noopener noreferrer"
+     aria-label="케이-스킬 GitHub 저장소 (NomaDamas/k-skill)로 이동">
     <div class="hyeonpan-rope hyeonpan-rope-left"></div>
     <div class="hyeonpan-rope hyeonpan-rope-right"></div>
     <div class="hyeonpan-board">
       <span class="hyeonpan-text">케이-스킬</span>
     </div>
-  </div>
+  </a>
   <div class="palace-pillar pillar-left"></div>
   <div class="palace-pillar pillar-right"></div>
   <div class="palace-floor"></div>

@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/build-agent-surface.mjs",
     "build": "vite build",
     "preview": "vite preview",
     "test:e2e": "playwright test",
