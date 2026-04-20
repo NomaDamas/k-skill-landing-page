@@ -101,7 +101,6 @@ export class DialogueEngine {
   }
 
   async renderGreeting() {
-    this.box.setMood('환영');
     await this.box.typeText(
       '조선의 궁궐에 당도한 것을 환영하오 낯선이여. 나는 나의 훌륭한 백성들을 굽어 살피는 깨우친 임금 세종이오.'
     );
@@ -112,7 +111,6 @@ export class DialogueEngine {
   }
 
   async renderIntroQuestion() {
-    this.box.setMood('호기심');
     await this.box.typeText(
       '조선의 제일 가는 인공 지능 기술 모음집에 대해서 알아보겠는가?'
     );
@@ -124,7 +122,6 @@ export class DialogueEngine {
   }
 
   async renderCategorySelect(preamble = false) {
-    this.box.setMood('중립적');
     let text = '어느 분야가 궁금하시오? 짐이 그 분야의 도구들을 일러드리겠소.';
     if (preamble) {
       text =
@@ -148,7 +145,6 @@ export class DialogueEngine {
       return this.transition('category_select');
     }
 
-    this.box.setMood('설명');
     const text = `${cat.sejong_intro}\n\n이 분야에는 다음과 같은 도구들이 있소:`;
     await this.box.typeText(text);
 
@@ -177,7 +173,6 @@ export class DialogueEngine {
       return this.transition('category_select');
     }
 
-    this.box.setMood(skill.deprecated ? '아쉬움' : '설명');
     const features = (skill.features_ko || []).map((f) => `• ${f}`).join('\n');
     const text = `[${skill.name_ko}]\n\n${skill.description_ko}\n\n[이 도구의 기능]\n${features}`;
     await this.box.typeText(text);
@@ -197,7 +192,6 @@ export class DialogueEngine {
   }
 
   async renderInstallationGlobal() {
-    this.box.setMood('가르침');
     const inst = this.data.installation || {};
     const intro = inst.global_intro_ko || '';
     const steps = (inst.global_steps_ko || []).join('\n\n');
@@ -223,7 +217,6 @@ export class DialogueEngine {
       return this.transition('category_select');
     }
 
-    this.box.setMood('가르침');
     const baseLine =
       '먼저 짐의 도구 모음집을 한 줄로 깃들이시오:\n  npx --yes skills add NomaDamas/k-skill --all -g';
     const special = this.specialInstall[skillId];
@@ -243,7 +236,6 @@ export class DialogueEngine {
   }
 
   async renderOutro() {
-    this.box.setMood('작별');
     await this.box.typeText(
       '또 만나기를 고대하겠소. 부디 평안히 가시오. 짐의 도구들이 그대의 길을 밝히기를.'
     );

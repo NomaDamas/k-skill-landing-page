@@ -1,12 +1,5 @@
 import TypeIt from 'typeit';
-
-const TAEGUK_SVG = `
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <circle cx="50" cy="50" r="48" fill="white" stroke="#0d0d0d" stroke-width="1.5"/>
-  <path d="M 50 2 A 48 48 0 0 1 50 98 A 24 24 0 0 0 50 50 A 24 24 0 0 1 50 2 Z" fill="#C60C30"/>
-  <path d="M 50 98 A 48 48 0 0 1 50 2 A 24 24 0 0 1 50 50 A 24 24 0 0 0 50 98 Z" fill="#1E3A8A"/>
-</svg>
-`.trim();
+import taegeukgiUrl from '../assets/taegeukgi.svg';
 
 export default class DialogueBox {
   constructor() {
@@ -31,10 +24,11 @@ export default class DialogueBox {
     box.setAttribute('aria-label', '세종대왕의 대화');
     box.innerHTML = `
       <div class="dialogue-leader-card">
-        <div class="taeguk" data-testid="taeguk" aria-hidden="true">${TAEGUK_SVG}</div>
+        <div class="taeguk" data-testid="taeguk">
+          <img src="${taegeukgiUrl}" alt="대한민국 태극기" />
+        </div>
         <div class="leader-info">
-          <div class="leader-name" data-testid="leader-name">한국 문명의 군주 세종대왕</div>
-          <div class="leader-mood">중립적</div>
+          <div class="leader-name" data-testid="leader-name">한국 문명의 군주 <br>세종대왕</div>
         </div>
       </div>
       <div class="dialogue-content">
@@ -153,9 +147,4 @@ export default class DialogueBox {
     if (typeof handler === 'function') this._choiceHandlers.push(handler);
   }
 
-  setMood(mood) {
-    if (!this.element) return;
-    const moodEl = this.element.querySelector('.leader-mood');
-    if (moodEl) moodEl.textContent = mood == null ? '' : String(mood);
-  }
 }

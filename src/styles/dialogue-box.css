@@ -62,16 +62,17 @@
 }
 
 .taeguk {
-  width: 70px;
+  width: 105px;
   height: 70px;
-  filter: drop-shadow(0 0 8px rgba(198, 12, 48, 0.4));
+  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.5));
   flex-shrink: 0;
 }
 
-.taeguk svg {
+.taeguk img {
   width: 100%;
   height: 100%;
   display: block;
+  object-fit: contain;
 }
 
 .leader-info {
@@ -90,13 +91,6 @@
   letter-spacing: 0.05em;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
   line-height: 1.3;
-}
-
-.leader-mood {
-  font-size: var(--font-size-xs);
-  color: var(--hanji-white);
-  opacity: 0.7;
-  letter-spacing: 0.1em;
 }
 
 /* =============================================================
@@ -248,7 +242,7 @@
   }
 
   .taeguk {
-    width: 56px;
+    width: 84px;
     height: 56px;
   }
 
