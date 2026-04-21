@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite';
 
+import { cloudflare } from "@cloudflare/vite-plugin";
+
 const utf8TextTypes = {
   name: 'utf8-text-types',
   configurePreviewServer(server) {
@@ -22,5 +24,5 @@ export default defineConfig({
     strictPort: true,
     allowedHosts: ['k-skill.nomadamas.org'],
   },
-  plugins: [utf8TextTypes],
+  plugins: [utf8TextTypes, cloudflare()],
 });

@@ -40,3 +40,9 @@ public/llms-full.txt
 public/skills.json
 public/sitemap.xml
 public/og-image.png
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
