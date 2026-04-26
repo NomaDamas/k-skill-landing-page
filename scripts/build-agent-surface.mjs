@@ -59,7 +59,7 @@ const llms = [
   '',
   '## Optional',
   '',
-  `- [Full skill catalog (markdown)](${SITE}/llms-full.txt): 44개 스킬 전체 설명·기능·사용 시점`,
+  `- [Full skill catalog (markdown)](${SITE}/llms-full.txt): ${skills.length}개 스킬 전체 설명·기능·사용 시점`,
   `- [Skills data (JSON)](${SITE}/skills.json): 프로그래밍 접근용 raw catalog`,
   `- [GitHub repository](${REPO}): 소스 코드, SKILL.md, 이슈`,
   `- [Interactive landing](${SITE}/): 세종대왕 알현 컨셉 인터랙티브 탐색기 (사람용)`,

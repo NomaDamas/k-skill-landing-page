@@ -1,7 +1,7 @@
 {
   "meta": {
-    "version": "1.0.0",
-    "total_skills": 44,
+    "version": "1.1.0",
+    "total_skills": 55,
     "total_categories": 8,
     "source_repo": "https://github.com/NomaDamas/k-skill"
   },
@@ -30,7 +30,11 @@
       "hwp": "전역 npm 꾸러미가 필요하오:\n  npm install -g kordoc pdfjs-dist",
       "bunjang-search": "전역 npm 꾸러미가 필요하오:\n  npm install -g bunjang-cli\n\n또는 일회성으로:\n  npx --yes bunjang-cli --help",
       "olive-young-search": "전역 npm 꾸러미가 필요하오:\n  npm install -g daiso\n\n또는 일회성으로:\n  npx --yes daiso health",
-      "hipass-receipt": "Chrome 세션이 필요하오. 하이패스 홈페이지에 그대가 직접 로그인한 Chrome을 짐이 빌려 쓰겠소.\n\n전역 npm 꾸러미도 함께 두시오:\n  npm install -g hipass-receipt"
+      "hipass-receipt": "Chrome 세션이 필요하오. 하이패스 홈페이지에 그대가 직접 로그인한 Chrome을 짐이 빌려 쓰겠소.\n\n전역 npm 꾸러미도 함께 두시오:\n  npm install -g hipass-receipt",
+      "k-dart": "금융감독원 DART OpenAPI 키를 환경 변수에 두시오:\n  export API_K_DART=발급받은_API_키\n\nDART 공식 사이트에서 신청하면 받을 수 있소.",
+      "catchtable-sniper": "Chrome 세션이 필요하오. 캐치테이블에 그대가 직접 로그인한 Chrome을 짐이 빌려 쓰겠소. 빈자리 감시와 자동 예약 시도를 안내해 드리리라.",
+      "rhwp-edit": "전역 npm 꾸러미가 필요하오:\n  npm install -g k-skill-rhwp\n\n@rhwp/core WASM 엔진을 통해 HWP 5.x 문서를 편집할 수 있소.",
+      "rhwp-advanced": "Rust 도구 모음이 필요하오. 업스트림 rhwp Rust CLI를 설치하시오:\n  cargo install rhwp\n\nHWP 레이아웃 진단과 IR 덤프, 버전 비교를 할 수 있소."
     }
   },
   "categories": [
@@ -46,7 +50,8 @@
         "seoul-subway-arrival",
         "subway-lost-property",
         "delivery-tracking",
-        "hipass-receipt"
+        "hipass-receipt",
+        "parking-lot-search"
       ]
     },
     {
@@ -61,6 +66,7 @@
         "hola-poke-yeoksam",
         "kakaotalk-mac",
         "k-schoollunch-menu",
+        "catchtable-sniper",
         "blue-ribbon-nearby"
       ]
     },
@@ -74,7 +80,8 @@
         "market-kurly-search",
         "bunjang-search",
         "olive-young-search",
-        "coupang-product-search"
+        "coupang-product-search",
+        "naver-shopping-search"
       ]
     },
     {
@@ -90,7 +97,9 @@
         "korean-scholarship-search",
         "han-river-water-level",
         "korea-weather",
-        "korean-law-search"
+        "korean-law-search",
+        "korean-privacy-terms",
+        "library-book-search"
       ]
     },
     {
@@ -112,12 +121,16 @@
       "sejong_intro": "글과 기록은 짐이 가장 아끼는 것이오. 훈민정음을 창제한 이 왕이 그대의 문서를 살피고 기록을 찾아드리겠소.",
       "skill_ids": [
         "hwp",
+        "rhwp-edit",
+        "rhwp-advanced",
         "geeknews-search",
         "naver-blog-research",
+        "naver-news-search",
         "joseon-sillok-search",
         "korean-patent-search",
         "korean-character-count",
-        "korean-spell-check"
+        "korean-spell-check",
+        "korean-slang-writing"
       ]
     },
     {
@@ -129,7 +142,9 @@
         "used-car-price-search",
         "toss-securities",
         "real-estate-search",
-        "korean-stock-search"
+        "korean-stock-search",
+        "k-dart",
+        "lh-notice-search"
       ]
     },
     {
@@ -538,6 +553,105 @@
       "command": "/lotto-results",
       "description_ko": "운세가 어떠한지 살펴보고 싶소? 짐이 당첨번호를 일러드리겠소. 천운(天運)이 그대 편이기를 바라오. 최신 회차와 당첨금 내역, 그대의 번호가 맞는지도 확인해 드리리라.",
       "features_ko": ["당첨번호 조회", "최신 회차 확인", "당첨금 내역", "번호 매칭 확인"],
+      "deprecated": false
+    },
+    {
+      "id": "parking-lot-search",
+      "name_ko": "근처 공영주차장 찾기",
+      "category": "transport",
+      "command": "/parking-lot-search",
+      "description_ko": "거마(車馬)를 어디에 매어두어야 하나 고민이오? 그대의 위치를 일러주시오. 짐이 공공데이터를 살펴 근처 공영주차장의 위치와 요금, 운영시간까지 보여드리겠소.",
+      "features_ko": ["근처 주차장 검색", "요금 비교", "운영시간 확인", "공영/민영 구분"],
+      "deprecated": false
+    },
+    {
+      "id": "catchtable-sniper",
+      "name_ko": "캐치테이블 예약 스나이핑",
+      "category": "food-life",
+      "command": "/catchtable-sniper",
+      "description_ko": "오픈런이 필요한 맛집의 자리를 노리고 있소? 그대가 직접 로그인한 캐치테이블 Chrome으로 짐이 빈자리를 감시하고 자동 예약을 시도해 드리겠소. 한 번도 손을 떼지 아니하고 지켜드리리라.",
+      "features_ko": ["빈자리 감시", "오픈런 자동화", "자동 예약 시도", "Chrome 세션 활용"],
+      "deprecated": false
+    },
+    {
+      "id": "naver-shopping-search",
+      "name_ko": "네이버 쇼핑 가격비교",
+      "category": "shopping",
+      "command": "/naver-shopping-search",
+      "description_ko": "물건의 값을 견주어 보고 싶소? 짐이 네이버 검색 Open API와 공개 BFF 자료로 상품 후보와 최저가, 판매처 링크를 보수적으로 비교해 드리겠소.",
+      "features_ko": ["상품 후보 조회", "최저가 비교", "판매처 링크 정리"],
+      "deprecated": false
+    },
+    {
+      "id": "korean-privacy-terms",
+      "name_ko": "개인정보처리방침·이용약관 자동 생성",
+      "category": "gov-public",
+      "command": "/korean-privacy-terms",
+      "description_ko": "Next.js 프로젝트에 법령에 맞는 약관과 방침이 필요하오? 짐이 개인정보보호법·약관규제법·전자상거래법에 기반하여 개인정보처리방침과 이용약관, 쿠키 배너, 동의 모달까지 갖추어 드리겠소.",
+      "features_ko": ["개인정보처리방침 생성", "이용약관 생성", "쿠키 배너 생성", "동의 모달 생성"],
+      "deprecated": false
+    },
+    {
+      "id": "library-book-search",
+      "name_ko": "도서관 도서 조회",
+      "category": "gov-public",
+      "command": "/library-book-search",
+      "description_ko": "도서관에서 책을 빌리고 싶소? 짐이 도서관 정보나루를 통해 책을 검색하고 어느 도서관에 소장되어 있는지 알려드리겠소. 그대 동네 도서관에 그 책이 있는지도 살펴드리리라.",
+      "features_ko": ["도서 검색", "도서 상세 조회", "소장 도서관 확인", "도서관별 소장 여부"],
+      "deprecated": false
+    },
+    {
+      "id": "rhwp-edit",
+      "name_ko": "HWP 문서 편집",
+      "category": "docs-search",
+      "command": "/rhwp-edit",
+      "description_ko": "한글 문서를 직접 손보고 싶소? 짐이 k-skill-rhwp CLI와 @rhwp/core WASM 엔진을 통해 본문 텍스트 삽입과 삭제, 표 생성, 셀 수정, replace-all까지 도와드리겠소. HWP 5.x 양식을 그대로 보존하며 편집할 수 있소.",
+      "features_ko": ["텍스트 삽입/삭제", "표 생성", "셀 수정", "replace-all", "HWP 5.x 라운드트립"],
+      "deprecated": false
+    },
+    {
+      "id": "rhwp-advanced",
+      "name_ko": "HWP 레이아웃·IR 디버깅",
+      "category": "docs-search",
+      "command": "/rhwp-advanced",
+      "description_ko": "한글 문서가 뜻대로 풀리지 아니하오? 짐이 업스트림 rhwp Rust CLI를 빌려 레이아웃을 진단하고 IR을 덤프하며, 버전을 비교하고 썸네일을 추출해 드리겠소. 잠긴 읽기 전용 문서도 풀어드리리라.",
+      "features_ko": ["레이아웃 진단", "IR 덤프", "버전 비교(ir-diff)", "썸네일 추출", "읽기 전용 해제"],
+      "deprecated": false
+    },
+    {
+      "id": "naver-news-search",
+      "name_ko": "네이버 뉴스 검색",
+      "category": "docs-search",
+      "command": "/naver-news-search",
+      "description_ko": "최신 소식이 궁금하오? 짐이 네이버 검색 Open API의 뉴스 검색을 통해 기사 제목과 요약, 발행 시각, 원문 링크를 정리해 드리겠소. 별도 API 키 발급 없이도 살필 수 있소.",
+      "features_ko": ["최신 뉴스 조회", "키워드 검색", "발행시각 확인", "원문 링크 정리"],
+      "deprecated": false
+    },
+    {
+      "id": "korean-slang-writing",
+      "name_ko": "한국어 유행어 글쓰기",
+      "category": "docs-search",
+      "command": "/korean-slang-writing",
+      "description_ko": "젊은이들의 말로 글을 짓고 싶소? 짐이 큐레이션된 유행어 후보와 나무위키의 풀이를 살펴, 그대의 글에 시류(時流)에 맞는 유행어를 입혀 드리겠소. 안전과 신선도를 살피며 신중히 쓰겠소.",
+      "features_ko": ["유행어 후보 조회", "무드/문맥 필터", "나무위키 best-effort 요약", "안전성 점검"],
+      "deprecated": false
+    },
+    {
+      "id": "k-dart",
+      "name_ko": "금감원 DART 전자공시 조회",
+      "category": "real-estate-finance",
+      "command": "/k-dart",
+      "description_ko": "기업의 곳간을 열어 살펴보고 싶소? 짐이 금융감독원 전자공시(DART) OpenAPI를 통해 공시 검색, 기업개황, 재무제표, 배당, 증자/감자, 감사의견, 주요사항보고서까지 14개 영역을 보여드리겠소.",
+      "features_ko": ["공시 검색", "기업개황 조회", "재무제표 조회", "배당/증자/감자", "주요사항보고서"],
+      "deprecated": false
+    },
+    {
+      "id": "lh-notice-search",
+      "name_ko": "LH 청약 공고문 조회",
+      "category": "real-estate-finance",
+      "command": "/lh-notice-search",
+      "description_ko": "백성의 살림터를 구하고자 하오? 짐이 한국토지주택공사(LH)의 임대·분양·신혼희망타운·토지·상가 공고를 지역과 상태, 공고유형, 키워드로 살펴드리겠소. KST 기준 마감 여부도 함께 일러드리리라.",
+      "features_ko": ["LH 공고 검색", "지역별 필터", "공고유형 필터", "마감 여부 확인", "신혼희망타운 조회"],
       "deprecated": false
     }
   ]
