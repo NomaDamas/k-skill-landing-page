@@ -1,7 +1,7 @@
 {
   "meta": {
-    "version": "1.2.0",
-    "total_skills": 61,
+    "version": "1.3.0",
+    "total_skills": 80,
     "total_categories": 8,
     "source_repo": "https://github.com/NomaDamas/k-skill"
   },
@@ -46,6 +46,11 @@
       "skill_ids": [
         "ktx-booking",
         "srt-booking",
+        "express-bus-booking",
+        "intercity-bus-booking",
+        "flight-ticket-search",
+        "myrealtrip-search",
+        "korean-transit-route",
         "cheap-gas-nearby",
         "seoul-subway-arrival",
         "subway-lost-property",
@@ -68,6 +73,7 @@
         "k-schoollunch-menu",
         "catchtable-sniper",
         "foresttrip-vacancy",
+        "gangnamunni-clinic-search",
         "blue-ribbon-nearby"
       ]
     },
@@ -80,9 +86,11 @@
         "daiso-product-search",
         "market-kurly-search",
         "bunjang-search",
+        "daangn-used-goods-search",
         "olive-young-search",
         "coupang-product-search",
-        "naver-shopping-search"
+        "naver-shopping-search",
+        "danawa-price-search"
       ]
     },
     {
@@ -102,7 +110,11 @@
         "korean-privacy-terms",
         "library-book-search",
         "iros-registry-automation",
-        "corporate-registration-consulting"
+        "corporate-registration-consulting",
+        "nts-business-registration",
+        "kosis-stats",
+        "seoul-density",
+        "donation-place-search"
       ]
     },
     {
@@ -114,7 +126,9 @@
         "kbl-results",
         "kbo-results",
         "kleague-results",
-        "lck-analytics"
+        "lck-analytics",
+        "korean-marathon-schedule",
+        "ticket-availability"
       ]
     },
     {
@@ -143,10 +157,14 @@
       "sejong_intro": "곳간을 살피는 일은 가벼이 여길 수 없소. 집값부터 주식까지, 어떤 재화의 일을 보겠소?",
       "skill_ids": [
         "used-car-price-search",
+        "daangn-cars-search",
         "toss-securities",
         "real-estate-search",
+        "daangn-realty-search",
+        "gongsijiga-search",
         "korean-stock-search",
         "k-dart",
+        "daishin-report-search",
         "lh-notice-search",
         "korean-jangbu-for",
         "court-auction-notice-search"
@@ -160,6 +178,7 @@
       "skill_ids": [
         "k-skill-setup",
         "lotto-results",
+        "daangn-jobs-search",
         "k-skill-cleaner"
       ]
     }
@@ -712,6 +731,177 @@
       "command": "/k-skill-cleaner",
       "description_ko": "그대의 도구함에 쓰지 아니하는 도구가 쌓였소? 짐이 에이전트별 호출 기록을 살펴 한 번도 쓴 적 없는 K-스킬을 골라드리겠소. 추천만 드리고 삭제는 그대의 윤허를 받은 뒤에야 행하리라. 지키고픈 도구는 미리 일러두시오.",
       "features_ko": ["사용 흔적 점검", "미사용 스킬 추천", "에이전트별 호출 기록 분석", "삭제 전 사용자 승인"],
+      "deprecated": false
+    },
+    {
+      "id": "express-bus-booking",
+      "name_ko": "고속버스 예매",
+      "category": "transport",
+      "command": "/express-bus-booking",
+      "description_ko": "그대가 도성(都城) 밖 먼 고을로 길을 나서고자 하오? 짐이 KOBUS 고속버스의 시간표와 빈 좌석, 우등·프리미엄 등급까지 살펴 임시 선점을 도와드리겠소. 결제는 그대가 직접 하시되, 공식 결제 페이지 앞까지는 짐이 길을 닦아드리리라.",
+      "features_ko": ["노선 및 시간표 조회", "좌석·요금 확인", "우등/프리미엄 구분", "임시 선점", "공식 결제 페이지 안내"],
+      "deprecated": false
+    },
+    {
+      "id": "intercity-bus-booking",
+      "name_ko": "시외버스 예매",
+      "category": "transport",
+      "command": "/intercity-bus-booking",
+      "description_ko": "고속버스가 닿지 아니하는 작은 고을에는 시외버스가 다니오. 짐이 티머니(Tmoney) 시외버스 공식 자료로 노선과 시간표, 좌석과 요금을 살펴드리겠소. 결제는 그대의 손에 맡기되, 그 앞까지는 짐이 인도해 드리리라.",
+      "features_ko": ["노선 및 시간표 조회", "좌석/요금 확인", "터미널 코드 검색", "공식 결제 페이지 안내"],
+      "deprecated": false
+    },
+    {
+      "id": "flight-ticket-search",
+      "name_ko": "항공권 검색",
+      "category": "transport",
+      "command": "/flight-ticket-search",
+      "description_ko": "바다 건너 먼 나라로 떠나고자 하오? 짐이 Google Flights의 공개 검색 자료로 항공권 후보와 최저가·평균가를 비교해 드리겠소. 편도와 왕복, 날짜별·월별·연도별로 살펴드리리라. 실제 결제는 그대가 직접 검색 링크를 따라가 처리하시오.",
+      "features_ko": ["편도/왕복 검색", "최저가·평균가 비교", "월별/연도별 샘플 조회", "예약 링크 생성"],
+      "deprecated": false
+    },
+    {
+      "id": "myrealtrip-search",
+      "name_ko": "마이리얼트립 검색",
+      "category": "transport",
+      "command": "/myrealtrip-search",
+      "description_ko": "여행길의 묵을 곳과 즐길 거리를 함께 챙기고 싶소? 짐이 마이리얼트립 공식 MCP 서버로 항공권과 숙소, 투어·티켓·액티비티까지 한자리에 찾아드리겠소. 가격과 예약 링크도 갖추어 보이리라.",
+      "features_ko": ["항공권 검색", "숙소 검색 및 상세", "투어/티켓/액티비티 조회", "예약 링크 안내"],
+      "deprecated": false
+    },
+    {
+      "id": "korean-transit-route",
+      "name_ko": "대중교통 길찾기",
+      "category": "transport",
+      "command": "/korean-transit-route",
+      "description_ko": "주소 두 곳을 일러주시오. 짐이 ODsay 공식 자료로 지하철과 버스, 도보를 엮어 도어투도어 경로를 찾아드리겠소. 환승이 가장 적은 길과 시간이 가장 짧은 길을 함께 일러드리리라.",
+      "features_ko": ["주소 간 경로 검색", "지하철+버스+도보 연계", "환승 최소 경로", "최소 시간 경로", "Kakao 지오코딩"],
+      "deprecated": false
+    },
+    {
+      "id": "gangnamunni-clinic-search",
+      "name_ko": "강남언니 병원 조회",
+      "category": "food-life",
+      "command": "/gangnamunni-clinic-search",
+      "description_ko": "성형외과나 피부과 병원을 견주어 보고 싶소? 짐이 강남언니 공개 검색 페이지를 살펴 병원 후보와 평점, 리뷰 수, 지원 언어, 공개 링크까지 정리해 드리겠소. 예약과 상담은 그대가 직접 하시되, 후보 추리는 짐이 거들어 드리리라.",
+      "features_ko": ["병원 후보 검색", "평점 및 리뷰 수 확인", "지원 언어 안내", "공개 병원 링크 정리"],
+      "deprecated": false
+    },
+    {
+      "id": "daangn-used-goods-search",
+      "name_ko": "당근 중고거래 검색",
+      "category": "shopping",
+      "command": "/daangn-used-goods-search",
+      "description_ko": "동네 이웃의 중고 물건을 살펴보고 싶소? 짐이 당근 공개 자료로 키워드와 지역 기준의 매물을 찾아드리겠소. 다만 채팅이나 찜, 구매 같은 계정 일은 그대가 직접 하셔야 하오.",
+      "features_ko": ["키워드/지역 검색", "매물 상세 조회", "읽기 전용 조회"],
+      "deprecated": false
+    },
+    {
+      "id": "danawa-price-search",
+      "name_ko": "다나와 가격비교",
+      "category": "shopping",
+      "command": "/danawa-price-search",
+      "description_ko": "여러 장터의 값을 한눈에 견주어 보고 싶소? 짐이 다나와 공개 검색·가격비교 표면으로 상품 후보를 찾고, 배송비 포함 실구매가와 카드 할인가, 무이자 할부까지 보수적으로 비교해 드리겠소. 결제와 장바구니는 그대의 손에 두리라.",
+      "features_ko": ["상품 후보 검색", "쇼핑몰별 최저가 비교", "배송비 포함 실구매가", "카드 할인·무이자 할부 확인"],
+      "deprecated": false
+    },
+    {
+      "id": "nts-business-registration",
+      "name_ko": "사업자등록 진위확인",
+      "category": "gov-public",
+      "command": "/nts-business-registration",
+      "description_ko": "거래처의 사업자등록이 살아 있는지 가려야 하오? 짐이 국세청 공식 자료로 사업자등록번호의 상태(계속사업자·휴업자·폐업자)와 진위 여부를 확인해 드리겠소. 별도 키 발급 없이도 살필 수 있소.",
+      "features_ko": ["사업자등록번호 상태조회", "진위확인", "과세유형 확인", "공공데이터포털 공식 자료"],
+      "deprecated": false
+    },
+    {
+      "id": "kosis-stats",
+      "name_ko": "KOSIS 국가통계 조회",
+      "category": "gov-public",
+      "command": "/kosis-stats",
+      "description_ko": "나라의 살림을 숫자로 가늠하고 싶소? 짐이 국가통계포털(KOSIS) Open API로 인구·가구·물가·고용 등 한국 공식 통계표를 검색하고 메타데이터와 자료 셀을 가져다 보여드리겠소. 분석과 시각화는 그대의 손에 맡기되, 원자료(原資料)는 짐이 갖추어 드리리라.",
+      "features_ko": ["통계표 검색", "메타데이터 조회", "데이터 셀 조회", "대용량 자료 다운로드"],
+      "deprecated": false
+    },
+    {
+      "id": "seoul-density",
+      "name_ko": "서울 실시간 혼잡도 조회",
+      "category": "gov-public",
+      "command": "/seoul-density",
+      "description_ko": "도성(都城)의 인파가 궁금하오? 짐이 서울 실시간 도시데이터로 강남역·홍대·명동 같은 121개 핫스팟의 혼잡도 단계와 추정 인구 범위를 일러드리겠소. 5분마다 갱신되는 자료이니 출타 전에 살펴보시오.",
+      "features_ko": ["핫스팟 혼잡도 조회", "추정 인구 범위 확인", "여유/보통/약간붐빔/붐빔 단계 표시", "121개 장소 지원"],
+      "deprecated": false
+    },
+    {
+      "id": "donation-place-search",
+      "name_ko": "기부처 조회",
+      "category": "gov-public",
+      "command": "/donation-place-search",
+      "description_ko": "백성을 돕는 자리에 정성을 보태고 싶소? 짐이 지역과 분야 기준으로 기부처 후보를 추려드리겠소. 1365 기부포털의 검증 보조 링크도 함께 보이리라. 다만 기부의 실행은 그대가 직접 공식 페이지에서 하셔야 하오.",
+      "features_ko": ["지역/분야별 기부처 추천", "1365 검증 보조 링크", "공식 페이지 안내", "결제·자동 후원 미실행"],
+      "deprecated": false
+    },
+    {
+      "id": "korean-marathon-schedule",
+      "name_ko": "한국 마라톤·철인3종 일정 조회",
+      "category": "sports-ent",
+      "command": "/korean-marathon-schedule",
+      "description_ko": "몸을 단련해 먼 길을 달리고자 하오? 짐이 고러닝과 대한철인3종협회 공개 자료로 마라톤과 철인3종 대회의 일정·장소·신청 마감일·종목을 찾아드리겠소. 출전 채비는 짐이 거들어 드리리라.",
+      "features_ko": ["마라톤 일정 조회", "철인3종 대회 조회", "장소 및 종목 확인", "신청 마감일 안내"],
+      "deprecated": false
+    },
+    {
+      "id": "ticket-availability",
+      "name_ko": "공연 잔여석 조회",
+      "category": "sports-ent",
+      "command": "/ticket-availability",
+      "description_ko": "보고픈 공연의 자리가 아직 남았는지 궁금하오? 짐이 YES24와 인터파크의 공개 자료로 공연 일정과 등급별 잔여석 수를 단숨에 살펴드리겠소. 다만 예매와 결제는 매크로 금지 법령에 따라 짐이 대신 행하지 아니하니, 직접 다녀오시오.",
+      "features_ko": ["공연 일정 조회", "등급별 잔여석 수 확인", "YES24/인터파크 지원", "조회 전용(예매 불가)"],
+      "deprecated": false
+    },
+    {
+      "id": "daangn-cars-search",
+      "name_ko": "당근중고차 검색",
+      "category": "real-estate-finance",
+      "command": "/daangn-cars-search",
+      "description_ko": "동네 이웃의 중고차를 살펴보고 싶소? 짐이 당근중고차 공개 자료로 지역과 가격 조건에 맞는 차량을 찾고 상세 정보를 가져다 보여드리겠소. 문의와 구매 자동화는 행하지 아니하리라.",
+      "features_ko": ["지역/가격 조건 검색", "차량 상세 조회", "읽기 전용 조회"],
+      "deprecated": false
+    },
+    {
+      "id": "daangn-realty-search",
+      "name_ko": "당근부동산 검색",
+      "category": "real-estate-finance",
+      "command": "/daangn-realty-search",
+      "description_ko": "동네 부동산 매물을 가벼이 살펴보고 싶소? 짐이 당근부동산 공개 자료로 지역 기준 매물을 찾고 상세 정보를 정리해 드리겠소. 다만 문의와 예약, 계약은 그대가 공식 경로로 직접 진행하셔야 하오.",
+      "features_ko": ["지역별 매물 검색", "매물 상세 확인", "전·월세 조회", "읽기 전용 조회"],
+      "deprecated": false
+    },
+    {
+      "id": "gongsijiga-search",
+      "name_ko": "개별공시지가 조회",
+      "category": "real-estate-finance",
+      "command": "/gongsijiga-search",
+      "description_ko": "땅의 세금을 가늠하려면 공시지가(公示地價)부터 살펴야 하오. 짐이 국토교통부 부동산공시가격알리미 자료로 지번 단위 개별공시지가(원/㎡)와 최근 5년 추이, 전년 대비 변동률을 정리해 드리겠소. 다만 이는 시세나 실거래가가 아니라 세금 산정용 공시 단가임을 잊지 마시오.",
+      "features_ko": ["지번 단위 공시지가 조회", "다년도 추이 확인", "전년 대비 변동률", "세금 산정용 법적 기준"],
+      "deprecated": false
+    },
+    {
+      "id": "daishin-report-search",
+      "name_ko": "대신증권 리포트 조회",
+      "category": "real-estate-finance",
+      "command": "/daishin-report-search",
+      "description_ko": "장(場)의 흐름을 읽고자 하오? 짐이 대신증권 리포트 GitHub Pages 미러로 최신 HTML 리포트 목록과 원문, 설명 페이지, Rating·Target 표를 정리해 드리겠소. 다만 매수·매도 권고는 짐이 행하지 아니하니, 판단은 그대의 몫이오.",
+      "features_ko": ["최신 리포트 목록 조회", "원문 본문 추출", "Rating/Target 표 확인", "조회 전용(매매 미실행)"],
+      "deprecated": false
+    },
+    {
+      "id": "daangn-jobs-search",
+      "name_ko": "당근알바 검색",
+      "category": "misc",
+      "command": "/daangn-jobs-search",
+      "description_ko": "동네에서 일자리를 구하고자 하오? 짐이 당근알바 공개 자료로 키워드와 지역 기준의 알바·채용 공고를 찾고 상세 내용을 보여드리겠소. 다만 지원과 채팅은 그대가 당근 앱에서 직접 처리하셔야 하오.",
+      "features_ko": ["키워드/지역 검색", "공고 상세 조회", "읽기 전용 조회"],
       "deprecated": false
     }
   ]
