@@ -84,7 +84,7 @@ test.describe('K-Skill Landing Page — Civ5 Sejong Throne', () => {
     await expect(page.locator('[data-testid="choice-btn"][data-action="show-install"]')).toBeVisible();
   });
 
-  test('category_select shows 8 category buttons', async ({ page }) => {
+  test('category_select shows 10 category buttons', async ({ page }) => {
     await waitForState(page, 'intro_question', 12000);
     await waitForTypingDone(page);
 
@@ -94,7 +94,7 @@ test.describe('K-Skill Landing Page — Civ5 Sejong Throne', () => {
     await waitForTypingDone(page);
 
     const choices = page.locator('[data-testid="choices"] [data-testid="choice-btn"]');
-    await expect(choices).toHaveCount(9, { timeout: 8000 });
+    await expect(choices).toHaveCount(11, { timeout: 8000 });
 
     const expectedLabels = [
       '교통/예약',
@@ -104,6 +104,8 @@ test.describe('K-Skill Landing Page — Civ5 Sejong Throne', () => {
       '스포츠/엔터',
       '문서/검색',
       '부동산/금융',
+      '조달/기업실사',
+      '채용/일자리',
       '기타',
     ];
     const texts = (await choices.allTextContents()).map((t) => t.trim());

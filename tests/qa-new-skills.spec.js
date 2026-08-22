@@ -31,24 +31,48 @@ async function navigateToCategory(page, categoryLabel) {
 const cases = [
   {
     category: '교통/예약',
-    expectedNew: ['고속버스 예매', '시외버스 예매', '항공권 검색', '마이리얼트립 검색', '대중교통 길찾기'],
+    expectedNew: [
+      '고속버스 예매',
+      '시외버스 예매',
+      '항공권 검색',
+      '대중교통 길찾기',
+      '전기차 충전소 조회',
+      '고속도로 소통 정보 조회',
+      '서울 따릉이 조회',
+    ],
   },
-  { category: '음식/생활', expectedNew: ['강남언니 병원 조회', '근처 응급실 조회'] },
+  { category: '음식/생활', expectedNew: ['근처 응급실 조회', '요양·건강검진기관 조회', '한국 공휴일·절기 조회'] },
   { category: '쇼핑/가격', expectedNew: ['당근 중고거래 검색', '다나와 가격비교', '오늘의집 특가 조회'] },
   {
     category: '정부/공공',
     expectedNew: [
-      '사업자등록 진위확인',
       'KOSIS 국가통계 조회',
       '서울 실시간 혼잡도 조회',
       '기부처 조회',
-      'K-Startup 공고 조회',
-      '지방선거 후보자 조회',
+      '국회 의안·표결 조회',
+      '건축물대장 조회',
+      '주택 공시가격 조회',
     ],
   },
   {
+    category: '조달/기업실사',
+    expectedNew: [
+      '국방조달 공고 검색',
+      '나라장터 발주계획 검색',
+      '부정당제재업체 조회',
+      '고액·상습 체납자 조회',
+      '사업자 건전성 실사',
+      '사업자등록 진위확인',
+      'K-Startup 공고 조회',
+    ],
+  },
+  {
+    category: '채용/일자리',
+    expectedNew: ['채용공고 적합도 매칭', '잡코리아 인재 검색', '사람인 인재 검색'],
+  },
+  {
     category: '스포츠/엔터',
-    expectedNew: ['한국 마라톤·철인3종 일정 조회', '공연 잔여석 조회', '영화관 검색'],
+    expectedNew: ['한국 마라톤·철인3종 일정 조회', '공연 정보 검색', '사주팔자 운세 풀이'],
   },
   {
     category: '부동산/금융',
@@ -58,9 +82,11 @@ const cases = [
       '개별공시지가 조회',
       '대신증권 리포트 조회',
       'SH 공고 검색',
+      '토스증권 조회',
+      '한국은행 경제통계 조회',
     ],
   },
-  { category: '기타', expectedNew: ['당근알바 검색'] },
+  { category: '기타', expectedNew: ['로또 당첨 확인'] },
 ];
 
 test.describe('K-Skill new skill registrations render in UI', () => {
