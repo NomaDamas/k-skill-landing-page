@@ -134,7 +134,7 @@ test.describe('K-Skill Landing Page — Civ5 Sejong Throne', () => {
     expect(await choices.count()).toBeGreaterThanOrEqual(8);
 
     const texts = (await choices.allTextContents()).map((t) => t.trim());
-    expect(texts.some((t) => t.includes('KTX 예매'))).toBe(true);
+    expect(texts.some((t) => t.includes('KTX 시간표 조회'))).toBe(true);
   });
 
   test('skill_detail shows description and features', async ({ page }) => {
@@ -148,7 +148,7 @@ test.describe('K-Skill Landing Page — Civ5 Sejong Throne', () => {
 
     await waitForState(page, 'category_intro', 8000);
     await waitForTypingDone(page);
-    await page.locator('[data-testid="choice-btn"]', { hasText: 'KTX 예매' }).click();
+    await page.locator('[data-testid="choice-btn"]', { hasText: 'KTX 시간표 조회' }).click();
 
     await waitForState(page, 'skill_detail', 8000);
     await waitForTypingDone(page);
@@ -172,7 +172,7 @@ test.describe('K-Skill Landing Page — Civ5 Sejong Throne', () => {
 
     await waitForState(page, 'category_intro', 8000);
     await waitForTypingDone(page);
-    await page.locator('[data-testid="choice-btn"]', { hasText: 'KTX 예매' }).click();
+    await page.locator('[data-testid="choice-btn"]', { hasText: 'KTX 시간표 조회' }).click();
 
     await waitForState(page, 'skill_detail', 8000);
     await waitForTypingDone(page);
@@ -269,11 +269,11 @@ test.describe('K-Skill Landing Page — Civ5 Sejong Throne', () => {
     await waitForTypingDone(page);
 
     await expect(page.locator('[data-testid="dialogue-text"]')).toContainText(
-      'KTX 예매 설치 방법',
+      'KTX 시간표 조회 설치 방법',
       { timeout: 8000 },
     );
     await expect(page.locator('[data-testid="dialogue-text"]')).toContainText(
-      'pip install korail2 pycryptodome',
+      'uv',
     );
   });
 
@@ -328,7 +328,7 @@ test.describe('K-Skill Landing Page — Civ5 Sejong Throne', () => {
 
     await waitForState(page, 'category_intro', 8000);
     await waitForTypingDone(page);
-    await page.locator('[data-testid="choice-btn"]', { hasText: 'KTX 예매' }).click();
+    await page.locator('[data-testid="choice-btn"]', { hasText: 'KTX 시간표 조회' }).click();
 
     await waitForState(page, 'skill_detail', 8000);
     await waitForTypingDone(page);

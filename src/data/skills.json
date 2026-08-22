@@ -17,13 +17,13 @@
       "에이전트: Claude Code, Codex, OpenCode 중 하나",
       "Node.js + npm (또는 pnpm, bun)",
       "Python 3 (일부 도구용)",
-      "macOS Homebrew (kakaocli 등 macOS 전용 도구용)"
+      "macOS Homebrew (katok 등 macOS 전용 도구용)"
     ],
     "secrets_ko": "민감한 자격 증명은 ~/.config/k-skill/secrets.env 에 보관하시오. 권한은 0600으로 두는 것이 안전하오. 환경 변수 → 에이전트 비밀 금고 → 이 파일 → 사용자 입력 순으로 짐이 자동으로 찾아 드리리라.",
     "special": {
-      "ktx-booking": "Python 꾸러미가 필요하오:\n  python3 -m pip install korail2 pycryptodome\n\nKTX 계정 자격이 있어야 하오. /k-skill-setup 으로 KSKILL_KTX_ID, KSKILL_KTX_PASSWORD 를 등록하시오.",
-      "srt-booking": "Python 꾸러미가 필요하오:\n  python3 -m pip install SRTrain\n\nSRT 계정 자격이 있어야 하오. /k-skill-setup 으로 KSKILL_SRT_ID, KSKILL_SRT_PASSWORD 를 등록하시오.",
-      "kakaotalk-mac": "macOS 전용이오. Homebrew로 설치하시오:\n  brew install silver-flight-group/tap/kakaocli\n\n그리고 카카오톡 데스크톱이 미리 로그인되어 있어야 짐이 그대의 대화를 들여다볼 수 있소.",
+      "ktx-booking": "Python 3.11 이상과 uv가 필요하오. uv가 openpyxl 환경을 스스로 갖추니 별도 꾸러미 설치는 없소. 로그인과 자격 증명은 필요치 않소 — 로그인 없이 공개되는 공식 시간표만 조회하오.",
+      "srt-booking": "Python 3.11 이상과 uv가 필요하오. 회원 로그인 없이 익명으로 조회하니 SRT 계정은 필요치 않소. 예매는 공식 SRT에서 그대가 직접 하시오.",
+      "kakaotalk-mac": "Apple Silicon macOS 전용이오. katok CLI를 설치하시오:\n  brew tap NomaDamas/katok https://github.com/NomaDamas/katok.git && brew install katok\n또는 Cargo로:\n  cargo install katok\n현재 터미널 앱에 Full Disk Access 권한을 허용하시오. 메시지 전송·삭제는 지원하지 않소 — 검색 전용이오.",
       "korean-law-search": "전역 npm 꾸러미가 필요하오:\n  npm install -g korean-law-mcp\n\n그리고 법제처 API 키를 환경 변수에 두시오:\n  export LAW_OC=발급받은_OC_식별자",
       "korean-patent-search": "특허정보원 KIPRIS Plus 키를 환경 변수에 두시오:\n  export KIPRIS_PLUS_API_KEY=발급받은_서비스_키",
       "hwp": "전역 npm 꾸러미가 필요하오:\n  npm install -g kordoc pdfjs-dist",
@@ -39,7 +39,7 @@
       "id": "transport",
       "name_ko": "교통/예약",
       "icon": "🚄",
-      "sejong_intro": "그대가 이 넓은 조선 땅을 누비고자 한다면 짐이 길을 일러주리라. 철마(鐵馬)를 예매하고, 길이 막혔는지 살피며, 두 바퀴 수레와 충전소까지 — 어떤 도구를 살펴보겠소?",
+      "sejong_intro": "그대가 이 넓은 조선 땅을 누비고자 한다면 짐이 길을 일러주리라. 철마(鐵馬)의 시각을 살피고, 길이 막혔는지 보고, 두 바퀴 수레와 충전소까지 — 어떤 도구를 살펴보겠소?",
       "skill_ids": [
         "ktx-booking",
         "srt-booking",
@@ -237,29 +237,29 @@
   "skills": [
     {
       "id": "ktx-booking",
-      "name_ko": "KTX 예매",
+      "name_ko": "KTX 시간표 조회",
       "category": "transport",
       "command": "/ktx-booking",
-      "description_ko": "그대가 먼 길을 떠나고자 한다면, 짐이 철마(鐵馬)의 표를 구해 드리리라. 좌석을 찾고 예매하며, 필요하다면 열차도 바꿀 수 있소. 취소 또한 짐이 대신 처리해 드리겠소.",
+      "description_ko": "그대가 먼 길을 떠나고자 한다면, 짐이 한국철도공사가 로그인 없이 공개하는 최신 KTX 운행시간표에서 출발역·도착역·시간대에 맞는 열차를 찾아드리겠소. 다만 이것은 공개 운행계획이라, 실시간 잔여석과 예매·결제·취소는 공식 코레일에서 그대가 직접 하셔야 하오.",
       "features_ko": [
-        "좌석 검색",
-        "예매 및 취소",
-        "열차 변경",
-        "예약 내역 조회"
+        "공식 공개 시간표 조회",
+        "출발역·도착역·시간대 검색",
+        "조회 전용 (실시간 잔여석 아님)",
+        "예매는 공식 코레일에서 직접"
       ],
       "deprecated": false
     },
     {
       "id": "srt-booking",
-      "name_ko": "SRT 예매",
+      "name_ko": "SRT 시간표·좌석 조회",
       "category": "transport",
       "command": "/srt-booking",
-      "description_ko": "수서(水西)에서 출발하는 고속열차를 타고자 하오? 짐이 SRT의 빈 좌석을 찾아 예매해 드리겠소. 매진된 열차라도 재시도 계획을 세워 그대를 돕겠소.",
+      "description_ko": "SRT를 타고 떠나고자 하오? 짐이 로그인 없이 SRTrain의 검색 경로로 현재 운행 후보와 일반실·특실의 예약 가능 여부를 실시간으로 살펴드리겠소. 예매·결제·취소는 실행하지 아니하니, 구매는 공식 SRT에서 그대가 직접 하시오.",
       "features_ko": [
-        "좌석 검색",
-        "예매 및 취소",
-        "매진 재시도",
-        "예약 내역 조회"
+        "실시간 운행 후보 조회",
+        "일반실·특실 예약 가능 여부",
+        "로그인 불필요 조회 전용",
+        "예매는 공식 SRT에서 직접"
       ],
       "deprecated": false
     },
@@ -370,14 +370,15 @@
     },
     {
       "id": "kakaotalk-mac",
-      "name_ko": "카카오톡 Mac CLI",
+      "name_ko": "카카오톡 Mac 대화 검색",
       "category": "food-life",
       "command": "/kakaotalk-mac",
-      "description_ko": "Mac에서 카카오톡 대화를 살펴보고 싶소? 짐이 kakaocli를 통해 채팅 내역을 읽고 메시지를 검색해 드리겠소. 답장을 보내기 전에 반드시 그대의 확인을 받겠소.",
+      "description_ko": "Mac에서 카카오톡 대화를 찾고 싶소? 짐이 katok CLI로 로컬 대화 아카이브를 동기화하고 키워드·의미 검색으로 원하는 대화를 찾아드리겠소. 메시지 전송과 삭제는 이 도구의 범위가 아니오.",
       "features_ko": [
-        "채팅 내역 조회",
-        "메시지 검색",
-        "답장 전송 (확인 후)"
+        "로컬 대화 아카이브 동기화",
+        "키워드·BM25·의미 검색",
+        "대화 chunk 조회",
+        "전송·삭제 미지원 (검색 전용)"
       ],
       "deprecated": false
     },
